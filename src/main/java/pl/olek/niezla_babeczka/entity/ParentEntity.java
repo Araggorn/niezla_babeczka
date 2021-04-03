@@ -1,7 +1,10 @@
 package pl.olek.niezla_babeczka.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.hibernate.annotations.*;
+import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +14,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-
+@AllArgsConstructor
+@EqualsAndHashCode
 public class ParentEntity {
 
 
@@ -26,4 +30,8 @@ public class ParentEntity {
     private LocalDateTime updateTime;
 
     private boolean deleted;
+
+    public ParentEntity() {
+
+    }
 }
