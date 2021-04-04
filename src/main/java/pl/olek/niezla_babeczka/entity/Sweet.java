@@ -9,4 +9,7 @@ import javax.persistence.Entity;
 @Entity
 @Builder
 public class Sweet extends Product {
+
+Long quantity;
+
 }

@@ -3,10 +3,9 @@ package pl.olek.niezla_babeczka.entity;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -22,4 +21,7 @@ public class Order extends ParentEntity {
 
     @ManyToOne
     private User user;
+
+    @ManyToMany (mappedBy = "orderList")
+    List<Product> productList = new ArrayList<>();
 }

@@ -9,4 +9,7 @@ import javax.persistence.Entity;
 @Data
 @Builder
 public class Cake extends Product {
+
+    private Double radius;
+
 }

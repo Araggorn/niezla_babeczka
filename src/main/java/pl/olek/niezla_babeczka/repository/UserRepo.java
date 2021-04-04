@@ -6,4 +6,6 @@ import pl.olek.niezla_babeczka.entity.User;
 
 @Repository
 public interface UserRepo extends JpaRepository<User, Long> {
+
+
 }
