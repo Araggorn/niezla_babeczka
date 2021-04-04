@@ -5,8 +5,8 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 
+@Data
 @Entity
 @Builder
-@Data
-public class User extends ParentEntity {
+public class Sweet extends Product {
 }

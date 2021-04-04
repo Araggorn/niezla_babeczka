@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.persistence.Entity;
 
 @Entity
-@Builder
 @Data
-public class User extends ParentEntity {
+@Builder
+public class Pie extends Product{
 }
