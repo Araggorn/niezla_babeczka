@@ -4,11 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.olek.niezla_babeczka.dto.UserAddDto;
+import pl.olek.niezla_babeczka.dto.UserShowDto;
 import pl.olek.niezla_babeczka.entity.User;
 import pl.olek.niezla_babeczka.repository.UserRepo;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -35,5 +38,27 @@ public class UserService {
         return UserAddDto.toDto(userSaved);
     }
 
-    public List<UserAddDto>
+    public List<UserShowDto> showAllUsers() {
+        log.info("Show list of users");
+        return userRepo.findAllByDeletedIsFalse()
+                .stream()
+                .map(UserShowDto::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public Optional<UserShowDto> findById(Long id){
+        log.info("We are looking for user wiht id: {}", id);
+
+        return userRepo.findById(id).map(UserShowDto::toDto);
+    }
+
+    public void deleteById (Long id) {
+        log.info("Deleting user id: {}", id);
+        User user = userRepo.getOne(id);
+        user.setDeleted(true);
+        userRepo.save(user);
+    }
+
+
+
 }
