@@ -59,6 +59,16 @@ public class UserService {
         userRepo.save(user);
     }
 
+    public UserAddDto updateUser(UserAddDto addDto, Long id) {
+        User user = userRepo.getOne(id);
+        log.info("updating user id {}", user.getId());
+        user.setLogin(addDto.getLogin());
+        user.setMail(addDto.getEmail());
+        user.setPassword(passwordEncoder.encode(addDto.getPassword()));
 
+        User savedUser = userRepo.save(user);
+        log.info("updated note with id: {}", savedUser.getId());
+        return UserAddDto.toDto(savedUser);
+    }
 
 }
