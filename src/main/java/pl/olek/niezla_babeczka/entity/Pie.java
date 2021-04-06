@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 
 @Entity
 @Data
-@Builder
+
 public class Pie extends Product{
 
 

@@ -1,7 +1,6 @@
 package pl.olek.niezla_babeczka.entity;
 
 
-import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -11,7 +10,6 @@ import java.util.List;
 
 @Entity
 @Data
-@Builder
 public abstract class Product extends ParentEntity {
 
     String name;

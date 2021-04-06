@@ -1,7 +1,7 @@
 package pl.olek.niezla_babeczka.entity;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Entity
 @Builder
-@Data
+@NoArgsConstructor
 @Table(name = "users")
 public class User extends ParentEntity {
 

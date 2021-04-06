@@ -9,6 +9,7 @@ import pl.olek.niezla_babeczka.dto.UserAddDto;
 import pl.olek.niezla_babeczka.dto.UserShowDto;
 import pl.olek.niezla_babeczka.service.UserService;
 
+import javax.annotation.PostConstruct;
 import java.net.URI;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class UserController {
         return userService.showAllUsers();
     }
 
-    @GetMapping("/{id\\d+}")
+    @GetMapping("/{id:\\d+}")
     public ResponseEntity<UserShowDto> getUserById(@PathVariable("id") Long id){
         return userService.findById(id)
                 .map(ResponseEntity::ok)
@@ -45,7 +46,7 @@ public class UserController {
         return ResponseEntity.created(location).body(savedUser);
     }
 
-    @DeleteMapping("/{id\\d+}")
+    @DeleteMapping("/{id:\\d+}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id){
         userService.deleteById(id);
         log.info("Request to delete user id: {}", id);
@@ -56,5 +57,14 @@ public class UserController {
     public ResponseEntity<UserAddDto> editUser (@RequestBody UserAddDto userDto, @PathVariable("id") Long id){
         UserAddDto user = userService.updateUser(userDto, id);
         return ResponseEntity.ok(user);
+    }
+
+    @PostConstruct
+    void createSampleUser() {
+        userService.addUser(UserAddDto.builder()
+        .login("Olek")
+        .email("drednor@o2.pl")
+        .password("xx")
+        .build());
     }
 }
