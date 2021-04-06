@@ -16,7 +16,7 @@ public abstract class Product extends ParentEntity {
     Double price;
 
 
-    @ManyToMany(mappedBy = "productList")
+    @ManyToMany
     List<Order> orderList = new ArrayList<>();
 
 }

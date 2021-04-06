@@ -10,4 +10,8 @@ import java.util.List;
 public interface UserRepo extends JpaRepository<User, Long> {
 
 List<User> findAllByDeletedIsFalse();
+
+    boolean existsByLogin(String login);
+
+    User getByLogin(String login);
 }

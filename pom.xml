@@ -98,7 +98,6 @@
             <artifactId>jbcrypt</artifactId>
             <version>0.3m</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>

@@ -1,11 +1,11 @@
 package pl.olek.niezla_babeczka.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode
 @Builder
 public class OrderDto {
 

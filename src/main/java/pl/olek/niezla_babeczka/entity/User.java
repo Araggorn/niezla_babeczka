@@ -1,7 +1,6 @@
 package pl.olek.niezla_babeczka.entity;
 
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +15,11 @@ import java.util.List;
 @Entity
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
 @Table(name = "users")
 public class User extends ParentEntity {
 
@@ -35,6 +39,9 @@ public class User extends ParentEntity {
 
     @OneToMany (mappedBy = "user")
     List<Order> orders = new ArrayList<>();
+
+    @Column(name = "role")
+    private String role = "ROLE_USER";
 
 
 }

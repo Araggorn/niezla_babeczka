@@ -4,5 +4,6 @@
 # Datasource local storage ignored files
 /../../../../../../:\Users\AsiaMaciuśOlek\IdeaProjects\niezla_babeczka\.idea/dataSources/
 /dataSources.local.xml
+/dataSources/
 # Editor-based HTTP Client requests
 /httpRequests/

@@ -1,17 +1,19 @@
 package pl.olek.niezla_babeczka.entity;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "orders")
 public class Order extends ParentEntity {
 
@@ -24,6 +26,11 @@ public class Order extends ParentEntity {
     @ManyToOne
     private User user;
 
-    @ManyToMany (mappedBy = "orderList")
+    @ManyToMany
+    @JoinTable(
+            name = "order_product",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
     List<Product> productList = new ArrayList<>();
 }
