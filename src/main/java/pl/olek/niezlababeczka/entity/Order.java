@@ -3,8 +3,8 @@ package pl.olek.niezlababeczka.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -25,11 +25,6 @@ public class Order extends ParentEntity {
     @ManyToOne
     private User user;
 
-    @ManyToMany
-    @JoinTable(
-            name = "order_product",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    List<Product> productList = new ArrayList<>();
+    @OneToMany (mappedBy = "order")
+    private Set<OrderProduct> orderProducts = new HashSet<>();
 }

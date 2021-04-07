@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.ManyToMany;
 import javax.persistence.MappedSuperclass;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +15,10 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class Product extends ParentEntity {
+public class Product extends ParentEntity {
 
     private Double price;
 
-
-    @ManyToMany
     List<Order> orderList = new ArrayList<>();
 
 }

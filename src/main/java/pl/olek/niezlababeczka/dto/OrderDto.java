@@ -16,6 +16,7 @@ public class OrderDto {
     public static OrderDto toDto(Order order1) {
         return OrderDto.builder()
                 .orderNumber(order1.getOrderNumber())
+                .user(order1.getUser().getLogin())
                 .build();
 
     }
