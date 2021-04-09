@@ -21,7 +21,7 @@ class CakeOrderItem {
 - cake: Cake
 - layers: int, // 2-3
 - tastes: CakeLayerTaste[]
-- diameterInCm: int
+- numberOfPortions: int
 }
 
 CakeLayerTaste -- CakeOrderItem

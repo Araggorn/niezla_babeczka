@@ -11,6 +11,5 @@ import javax.persistence.Entity;
 @Entity
 public class Sweet extends Product {
 
-Long quantity;
 
 }
