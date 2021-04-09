@@ -1,0 +1,74 @@
+@startuml
+'Class11 <|.. Class12
+'Class13 --> Class14
+'Class15 ..> Class16
+'Class17 ..|> Class18
+'Class19 <--* Class20
+
+OrderItem <|-- CakeOrderItem
+OrderItem <|-- PieOrderItem
+OrderItem <|-- SweetOrderItem
+
+class OrderItem {
+- comment
+}
+
+class CakeLayerTaste {
+- name: String
+}
+
+class CakeOrderItem {
+- cake: Cake
+- layers: int, // 2-3
+- tastes: CakeLayerTaste[]
+- diameterInCm: int
+}
+
+CakeLayerTaste -- CakeOrderItem
+
+class PieSize {
+-name
+-width
+-length
+-height
+}
+
+class PieOrderItem {
+pie: Pie
+size: PieSize
+type: PieType
+}
+
+PieSize -- PieOrderItem
+
+class SweetOrderItem {
+sweet: Sweet
+quantity: int
+}
+
+class Product {
+- name
+}
+
+Product <|-- Cake
+Product <|-- Pie
+Product <|-- Sweet
+
+'Cake -- CakeOrderItem
+'Pie -- PieOrderItem
+'Sweet -- SweetOrderItem
+
+class Sweet {}
+class Pie {}
+class Cake {}
+
+
+User "1" -- "*" Order
+Order "1" -- "1..*" OrderItem
+
+'OrderItem "1" -- "1" Product
+
+
+
+
+@enduml

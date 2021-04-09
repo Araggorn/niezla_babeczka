@@ -4,11 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class OrderProduct {
+public class OrderItem {
 
     @ManyToOne
     private Order order;
-
 
     private Long productId;
 }

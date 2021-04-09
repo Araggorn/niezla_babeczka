@@ -26,5 +26,5 @@ public class Order extends ParentEntity {
     private User user;
 
     @OneToMany (mappedBy = "order")
-    private Set<OrderProduct> orderProducts = new HashSet<>();
+    private Set<OrderItem> orderItems = new HashSet<>();
 }
