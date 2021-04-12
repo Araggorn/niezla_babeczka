@@ -12,11 +12,12 @@ import javax.persistence.ManyToOne;
 @Setter
 public class PieOrderItem extends OrderItem {
 
-
+    @ManyToOne
+    @JoinColumn(name = "pie_size_id")
     private PieSize pieSize;
-    private PieType pieType;
+
 
     @ManyToOne
-    @JoinColumn(name = "type_id")
+    @JoinColumn(name = "pie_id")
     private Pie pie;
 }

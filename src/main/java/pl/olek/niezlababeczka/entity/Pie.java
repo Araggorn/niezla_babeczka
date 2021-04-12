@@ -11,9 +11,7 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 public class Pie extends Product{
 
-    private String size;
-    private String type;
-
-
+    private String name;
+    private String description;
 
 }

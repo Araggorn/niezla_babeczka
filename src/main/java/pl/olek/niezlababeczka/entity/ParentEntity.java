@@ -6,18 +6,15 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Entity
+@MappedSuperclass
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode
-public class ParentEntity {
+public abstract class ParentEntity {
 
 
     @Id

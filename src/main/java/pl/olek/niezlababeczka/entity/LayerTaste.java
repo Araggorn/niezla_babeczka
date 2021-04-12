@@ -12,9 +12,7 @@ import javax.persistence.Entity;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PieType extends ParentEntity{
+public class LayerTaste extends ParentEntity {
 
-    private String name;
-
-
+    private String taste;
 }

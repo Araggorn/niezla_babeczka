@@ -15,6 +15,6 @@ public class SweetOrderItem extends OrderItem{
     private int quantity;
 
     @ManyToOne
-    @JoinColumn(name = "type_id")
+    @JoinColumn(name = "sweet_id")
     private Sweet sweet;
 }
