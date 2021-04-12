@@ -1,7 +1,20 @@
 package pl.olek.niezlababeczka.entity;
 
-public class SweetOrderItem {
+import lombok.Getter;
+import lombok.Setter;
 
-    private Sweet sweet;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+@Getter
+@Setter
+public class SweetOrderItem extends OrderItem{
+
     private int quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private Sweet sweet;
 }
