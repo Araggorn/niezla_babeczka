@@ -6,8 +6,8 @@ import javax.persistence.Entity;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+//@AllArgsConstructor
+//@NoArgsConstructor
 @Entity
 public class Sweet extends Product {
 

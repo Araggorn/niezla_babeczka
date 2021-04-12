@@ -1,12 +1,10 @@
 package pl.olek.niezlababeczka.entity;
 
 import lombok.*;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Getter
@@ -19,8 +17,7 @@ import java.util.UUID;
 public class Order extends ParentEntity {
 
     @Id
-    @Type(type = "pg-uuid")
-    private UUID id;
+    private Long id;
 
     @Column(unique = true)
     Long orderNumber;
@@ -36,6 +33,7 @@ public class Order extends ParentEntity {
 
     @OneToMany (mappedBy = "order", cascade = CascadeType.ALL)
     private Set<PieOrderItem> pieOrderItems = new HashSet<>();
+
     @OneToMany (mappedBy = "order", cascade = CascadeType.ALL)
     private Set<SweetOrderItem> sweetOrderItems = new HashSet<>();
 }

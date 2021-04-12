@@ -5,11 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.MappedSuperclass;
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
 
-@MappedSuperclass
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,6 +16,5 @@ public class Product extends ParentEntity {
 
     private Double price;
 
-    List<Order> orderList = new ArrayList<>();
 
 }

@@ -6,6 +6,7 @@ import pl.olek.niezlababeczka.entity.Order;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 @Builder
 public class OrderDto {

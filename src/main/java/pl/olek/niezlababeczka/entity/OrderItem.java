@@ -1,18 +1,14 @@
 package pl.olek.niezlababeczka.entity;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class OrderItem {
 
     @Id
-    @Type(type = "pg-uuid")
-    private UUID id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "order_id")
