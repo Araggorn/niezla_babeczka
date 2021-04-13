@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 //@AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Sweet extends Product {
 
-
+    public Sweet(Double price) {
+        super(price);
+    }
 }

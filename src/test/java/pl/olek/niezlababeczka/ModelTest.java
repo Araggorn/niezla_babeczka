@@ -4,7 +4,9 @@ package pl.olek.niezlababeczka;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import pl.olek.niezlababeczka.entity.Cake;
 import pl.olek.niezlababeczka.entity.User;
+import pl.olek.niezlababeczka.repository.CakeRepo;
 import pl.olek.niezlababeczka.repository.UserRepo;
 
 import javax.persistence.EntityManager;
@@ -19,6 +21,8 @@ public class ModelTest {
     EntityManager em;
     @Autowired
     UserRepo userRepo;
+    @Autowired
+    CakeRepo cakeRepo;
 
     @Test
     void shouldLoadContext(){
@@ -35,6 +39,13 @@ public class ModelTest {
 
         assertThat(userRepo.existsByLogin("Kuba")).isTrue();
         assertThat(userRepo.getByLogin("Kuba").getMail()).isEqualTo("qbeczek@o2.pl");
+    }
+
+    @Test
+    void shouldSaveCake(){
+        Cake cake = new Cake(170.99 , 12.0);
+        cakeRepo.saveAndFlush(cake);
+        assertThat(cakeRepo.findAll().contains(cake));
     }
 
 
