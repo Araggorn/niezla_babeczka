@@ -75,20 +75,21 @@ public class ModelTest {
         orderRepo.saveAndFlush(newOrder);
 
         assertThat(orderRepo.existsById(1L)).isTrue();
-        //assertThat(orderRepo.getByOrOrderNumber(19828916L).getSweetOrderItems().size()).isEqualTo(1);
     }
 
     @Test
     void shouldCountOrders(){
         Sweet lolipop = new Sweet (3.00);
+        sweetRepo.save(lolipop);
         Set<SweetOrderItem> lolipops = new HashSet<>();
         SweetOrderItem sweetOrderItem = new SweetOrderItem(80, lolipop);
         lolipops.add(sweetOrderItem);
         User user = new User("Kuba", "qbeczek@o2.pl", "aaa", new HashSet<>(), "ROLE_ADMIN");
+        userRepo.save(user);
         Order newOrder = new Order(1L,19828916L, true, true,
                 user, null, null, lolipops);
         orderRepo.saveAndFlush(newOrder);
-        assertThat(orderRepo.getByOrOrderNumber(19828916L).getSweetOrderItems().size()).isEqualTo(1);
+        assertThat(orderRepo.getByOrderNumber(19828916L).getSweetOrderItems().size()).isEqualTo(1);
 
     }
 }

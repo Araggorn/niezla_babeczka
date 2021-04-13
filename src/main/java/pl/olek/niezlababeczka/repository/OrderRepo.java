@@ -7,7 +7,7 @@ import pl.olek.niezlababeczka.entity.Order;
 @Repository
 public interface OrderRepo extends JpaRepository<Order, Long> {
 
-    Order getByOrOrderNumber(Long orderNumber);
+    Order getByOrderNumber(Long orderNumber);
 
     boolean existsByOrderNumber(Long orderNum);
 
