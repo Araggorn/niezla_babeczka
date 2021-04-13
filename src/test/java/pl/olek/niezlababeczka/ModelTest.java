@@ -4,13 +4,15 @@ package pl.olek.niezlababeczka;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import pl.olek.niezlababeczka.entity.Cake;
-import pl.olek.niezlababeczka.entity.User;
+import pl.olek.niezlababeczka.entity.*;
 import pl.olek.niezlababeczka.repository.CakeRepo;
+import pl.olek.niezlababeczka.repository.OrderRepo;
+import pl.olek.niezlababeczka.repository.SweetRepo;
 import pl.olek.niezlababeczka.repository.UserRepo;
 
 import javax.persistence.EntityManager;
 import java.util.HashSet;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,6 +25,10 @@ public class ModelTest {
     UserRepo userRepo;
     @Autowired
     CakeRepo cakeRepo;
+    @Autowired
+    SweetRepo sweetRepo;
+    @Autowired
+    OrderRepo orderRepo;
 
     @Test
     void shouldLoadContext(){
@@ -48,5 +54,25 @@ public class ModelTest {
         assertThat(cakeRepo.findAll().contains(cake));
     }
 
+    @Test
+    void shouldSaveSweet(){
+        Sweet candy = new Sweet (8.00);
+        int a = (int) sweetRepo.count();
+        assertThat(sweetRepo.findAll().size()).isEqualTo(a);
+    }
 
+    @Test
+    void shouldSaveOrder(){
+        Sweet lolipop = new Sweet (3.00);
+        Set<SweetOrderItem> lolipops = new HashSet<>();
+        SweetOrderItem sweetOrderItem = new SweetOrderItem(80, lolipop);
+        lolipops.add(sweetOrderItem);
+        User user = new User("Kuba", "qbeczek@o2.pl", "aaa", new HashSet<>(), "ROLE_ADMIN");
+        Order newOrder = new Order(1L,19828916L, true, true,
+                user, null, null, lolipops);
+        orderRepo.saveAndFlush(newOrder);
+
+        assertThat(orderRepo.existsById(1L)).isTrue();
+        //assertThat(orderRepo.getByOrOrderNumber(19828916L).getSweetOrderItems().size()).isEqualTo(1);
+    }
 }

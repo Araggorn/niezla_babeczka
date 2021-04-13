@@ -19,6 +19,8 @@ public abstract class ParentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id",unique=true, nullable = false)
     protected Long id;
 
     @CreationTimestamp
