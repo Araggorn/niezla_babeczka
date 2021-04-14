@@ -5,10 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import pl.olek.niezlababeczka.entity.*;
-import pl.olek.niezlababeczka.repository.CakeRepo;
-import pl.olek.niezlababeczka.repository.OrderRepo;
-import pl.olek.niezlababeczka.repository.SweetRepo;
-import pl.olek.niezlababeczka.repository.UserRepo;
+import pl.olek.niezlababeczka.repository.*;
 
 import javax.persistence.EntityManager;
 import java.util.HashSet;
@@ -29,6 +26,12 @@ public class ModelTest {
     SweetRepo sweetRepo;
     @Autowired
     OrderRepo orderRepo;
+    @Autowired
+    LayerTasteRepo layerTasteRepo;
+    @Autowired
+    PieRepo pieR;
+    @Autowired
+    PieSizeRepo pieSizeRepo;
 
     @Test
     void shouldLoadContext(){
@@ -90,6 +93,26 @@ public class ModelTest {
                 user, null, null, lolipops);
         orderRepo.saveAndFlush(newOrder);
         assertThat(orderRepo.getByOrderNumber(19828916L).getSweetOrderItems().size()).isEqualTo(1);
+    }
 
+    @Test
+    void shouldSaveLayerTaste(){
+        LayerTaste lt = new LayerTaste("orange");
+        layerTasteRepo.save(lt);
+        String orange = "orange";
+        assertThat(layerTasteRepo.existsByTaste(orange)).isTrue();
+    }
+
+    @Test
+    void shouldSavePie(){
+        Pie pie = new Pie (99.00, "Apple Pie", "Delicious pie with layer of apple sauce");
+        pieR.save(pie);
+        assertThat(pieR.existsById(1L));
+    }
+    @Test
+    void shouldSavePieSizeAndCheckIfItIsBlank(){
+        PieSize ps = new PieSize("The pie is round with radius = 10cm");
+        pieSizeRepo.save(ps);
+        assertThat(pieSizeRepo.getOne(1L).getDescription()).isNotBlank();
     }
 }

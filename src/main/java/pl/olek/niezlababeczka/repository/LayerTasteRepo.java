@@ -6,4 +6,6 @@ import pl.olek.niezlababeczka.entity.LayerTaste;
 
 @Repository
 public interface LayerTasteRepo extends JpaRepository <LayerTaste, Long> {
+
+    boolean existsByTaste(String taste);
 }
