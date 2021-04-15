@@ -1,9 +1,6 @@
 package pl.olek.niezlababeczka.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -14,7 +11,6 @@ import javax.persistence.ManyToOne;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class PieOrderItem extends OrderItem {
 
     @ManyToOne
@@ -26,5 +22,10 @@ public class PieOrderItem extends OrderItem {
     @JoinColumn(name = "pie_id")
     private Pie pie;
 
-
+    @Override
+    public String toString() {
+        return "PieOrderItem{" +
+                "id=" + id +
+                '}';
+    }
 }

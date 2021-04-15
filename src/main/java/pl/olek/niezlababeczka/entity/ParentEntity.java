@@ -13,14 +13,11 @@ import java.util.Objects;
 @MappedSuperclass
 @Data
 @AllArgsConstructor
-@EqualsAndHashCode
 public abstract class ParentEntity {
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id",unique=true, nullable = false)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     protected Long id;
 
     @CreationTimestamp
@@ -31,12 +28,21 @@ public abstract class ParentEntity {
 
     private boolean deleted;
 
-    public ParentEntity() {    }
+    public ParentEntity() {
+    }
+
+    public ParentEntity(Long id) {
+        this.id = id;
+    }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ParentEntity)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof ParentEntity)) {
+            return false;
+        }
         ParentEntity that = (ParentEntity) o;
         return Objects.equals(id, that.id);
     }
