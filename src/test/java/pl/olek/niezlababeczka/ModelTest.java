@@ -8,7 +8,9 @@ import pl.olek.niezlababeczka.entity.*;
 import pl.olek.niezlababeczka.repository.*;
 
 import javax.persistence.EntityManager;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -114,5 +116,53 @@ public class ModelTest {
         PieSize ps = new PieSize("The pie is round with radius = 10cm");
         pieSizeRepo.save(ps);
         assertThat(pieSizeRepo.getOne(1L).getDescription()).isNotBlank();
+    }
+    @Test
+    void shouldSaveComplexOrder(){
+        User user = new User("Olek", "olek@olek.pl", "olo", new LinkedHashSet<>(), "ROLE_USER");
+        userRepo.saveAndFlush(user);
+
+        Sweet candy = new Sweet(9.00);
+        sweetRepo.save(candy);
+        Sweet loli = new Sweet(5.00);
+        sweetRepo.save(loli);
+        SweetOrderItem lolipops = new SweetOrderItem(10, loli);
+        SweetOrderItem candies = new SweetOrderItem(50, candy);
+        Set<SweetOrderItem> sweets = new HashSet<>();
+        sweets.add(lolipops);
+        sweets.add(candies);
+
+        Cake cake = new Cake(160.00, 16.0);
+        cakeRepo.saveAndFlush(cake);
+        LayerTaste lt = new LayerTaste("orange");
+        layerTasteRepo.saveAndFlush(lt);
+        LayerTaste lt2 = new LayerTaste("nuts");
+        layerTasteRepo.saveAndFlush(lt2);
+        LayerTaste lt3 = new LayerTaste("chocolate");
+        layerTasteRepo.saveAndFlush(lt3);
+
+        CakeOrderItem cakeOrderItem = new CakeOrderItem();
+        CakeLayer cakeLayer1 = new CakeLayer(cakeOrderItem, lt);
+        CakeLayer cakeLayer2 = new CakeLayer(cakeOrderItem, lt2);
+        CakeLayer cakeLayer3 = new CakeLayer(cakeOrderItem, lt3);
+        cakeOrderItem.setCake(cake);
+
+        Pie pie = new Pie(100.00, "cheesecake", "it's not a pie, but for this purpose it is");
+        pieR.saveAndFlush(pie);
+        PieSize pieSize = new PieSize("big: 40cm * 30cm");
+        pieSizeRepo.saveAndFlush(pieSize);
+        Pie pie2 = new Pie (125.00, "apple pie", "it's delicious pie");
+        pieR.saveAndFlush(pie2);
+        PieOrderItem pieOrderItem = new PieOrderItem(pieSize, pie);
+        PieOrderItem pieOrderItem1 = new PieOrderItem(pieSize, pie2);
+        Set<PieOrderItem> pieList = Set.of(pieOrderItem, pieOrderItem1);
+
+        //making an order;
+        Order order = new Order(1L, 1234L, false, false, user,
+                Collections.singleton(cakeOrderItem), pieList, sweets);
+        orderRepo.saveAndFlush(order);
+
+        assertThat(orderRepo.existsById(1L)).isTrue();
+
     }
 }
