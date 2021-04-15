@@ -165,4 +165,24 @@ public class ModelTest {
         assertThat(orderRepo.existsById(1L)).isTrue();
 
     }
+
+    @Test
+    void shouldSaveMoreThanOneSweets(){
+        User user = new User("Olek", "olek@olek.pl", "olo", new LinkedHashSet<>(), "ROLE_USER");
+        userRepo.saveAndFlush(user);
+        Sweet candy = new Sweet(9.00);
+        sweetRepo.save(candy);
+        Sweet loli = new Sweet(5.00);
+        sweetRepo.save(loli);
+        SweetOrderItem lolipops = new SweetOrderItem(10, loli);
+        SweetOrderItem candies = new SweetOrderItem(50, candy);
+        Set<SweetOrderItem> sweets = new HashSet<>();
+        sweets.add(lolipops);
+        sweets.add(candies);
+        Order order = new Order(1L, 222L, false, false, user, new HashSet<>(), new HashSet<>(), sweets);
+        orderRepo.saveAndFlush(order);
+
+        assertThat(orderRepo.existsById(1L)).isTrue();
+
+    }
 }
