@@ -1,17 +1,20 @@
 package pl.olek.niezlababeczka.entity;
 
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class OrderItem {
+@Setter
+public class OrderItem extends ParentEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id",unique=true, nullable = false)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Basic(optional = false)
+//    @Column(name = "id",unique=true, nullable = false)
+//    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "order_id")

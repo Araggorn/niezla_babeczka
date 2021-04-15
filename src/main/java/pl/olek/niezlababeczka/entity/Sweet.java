@@ -6,12 +6,15 @@ import javax.persistence.Entity;
 
 @Getter
 @Setter
-//@AllArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Sweet extends Product {
 
-    public Sweet(Double price) {
+    private String name;
+
+    public Sweet(Double price, String name) {
         super(price);
+        this.name = name;
     }
 }

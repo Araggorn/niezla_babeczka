@@ -8,10 +8,7 @@ import pl.olek.niezlababeczka.entity.*;
 import pl.olek.niezlababeczka.repository.*;
 
 import javax.persistence.EntityManager;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -61,14 +58,14 @@ public class ModelTest {
 
     @Test
     void shouldSaveSweet(){
-        Sweet candy = new Sweet (8.00);
+        Sweet candy = new Sweet (8.00, "candy");
         int a = (int) sweetRepo.count();
         assertThat(sweetRepo.findAll().size()).isEqualTo(a);
     }
 
     @Test
     void shouldSaveOrder(){
-        Sweet lolipop = new Sweet (3.00);
+        Sweet lolipop = new Sweet (3.00, "lolipop");
         sweetRepo.save(lolipop);
         Set<SweetOrderItem> lolipops = new HashSet<>();
         SweetOrderItem sweetOrderItem = new SweetOrderItem(80, lolipop);
@@ -84,7 +81,7 @@ public class ModelTest {
 
     @Test
     void shouldCountOrders(){
-        Sweet lolipop = new Sweet (3.00);
+        Sweet lolipop = new Sweet (3.00, "lolipop");
         sweetRepo.save(lolipop);
         Set<SweetOrderItem> lolipops = new HashSet<>();
         SweetOrderItem sweetOrderItem = new SweetOrderItem(80, lolipop);
@@ -122,12 +119,14 @@ public class ModelTest {
         User user = new User("Olek", "olek@olek.pl", "olo", new LinkedHashSet<>(), "ROLE_USER");
         userRepo.saveAndFlush(user);
 
-        Sweet candy = new Sweet(9.00);
+        Sweet candy = new Sweet(9.00, "candy");
         sweetRepo.save(candy);
-        Sweet loli = new Sweet(5.00);
+        Sweet loli = new Sweet(5.00, "lolipops");
         sweetRepo.save(loli);
         SweetOrderItem lolipops = new SweetOrderItem(10, loli);
+        lolipops.setId(1L);
         SweetOrderItem candies = new SweetOrderItem(50, candy);
+        candies.setId(2L);
         Set<SweetOrderItem> sweets = new HashSet<>();
         sweets.add(lolipops);
         sweets.add(candies);
@@ -151,10 +150,14 @@ public class ModelTest {
         pieR.saveAndFlush(pie);
         PieSize pieSize = new PieSize("big: 40cm * 30cm");
         pieSizeRepo.saveAndFlush(pieSize);
+        PieSize pieSize2 = new PieSize("small: 30cm * 20cm");
+        pieSizeRepo.saveAndFlush(pieSize2);
         Pie pie2 = new Pie (125.00, "apple pie", "it's delicious pie");
         pieR.saveAndFlush(pie2);
-        PieOrderItem pieOrderItem = new PieOrderItem(pieSize, pie);
+        PieOrderItem pieOrderItem = new PieOrderItem(pieSize2, pie);
+        pieOrderItem.setId(1L);
         PieOrderItem pieOrderItem1 = new PieOrderItem(pieSize, pie2);
+        pieOrderItem1.setId(2L);
         Set<PieOrderItem> pieList = Set.of(pieOrderItem, pieOrderItem1);
 
         //making an order;
@@ -170,12 +173,14 @@ public class ModelTest {
     void shouldSaveMoreThanOneSweets(){
         User user = new User("Olek", "olek@olek.pl", "olo", new LinkedHashSet<>(), "ROLE_USER");
         userRepo.saveAndFlush(user);
-        Sweet candy = new Sweet(9.00);
+        Sweet candy = new Sweet(9.00, "strawberry candy");
         sweetRepo.save(candy);
-        Sweet loli = new Sweet(5.00);
+        Sweet loli = new Sweet(5.00, "strawberry lolipops");
         sweetRepo.save(loli);
         SweetOrderItem lolipops = new SweetOrderItem(10, loli);
+        lolipops.setId(1L);
         SweetOrderItem candies = new SweetOrderItem(50, candy);
+        candies.setId(2L);
         Set<SweetOrderItem> sweets = new HashSet<>();
         sweets.add(lolipops);
         sweets.add(candies);
@@ -183,6 +188,29 @@ public class ModelTest {
         orderRepo.saveAndFlush(order);
 
         assertThat(orderRepo.existsById(1L)).isTrue();
+    }
+
+    @Test
+    void shouldUseOnePieSizeInTwoPieOrderItems(){
+        User user = new User("Olek", "olek@olek.pl", "olo", new LinkedHashSet<>(), "ROLE_USER");
+        userRepo.saveAndFlush(user);
+        Pie pie = new Pie(150.00, "cheesecake", "it's not a pie, but for this purpose it is");
+        pieR.saveAndFlush(pie);
+        PieSize pieSize = new PieSize("big: 40cm * 30cm");
+        pieSizeRepo.saveAndFlush(pieSize);
+        Pie pie2 = new Pie (125.00, "apple pie", "it's delicious pie");
+        pieR.saveAndFlush(pie2);
+        PieOrderItem pieOrderItem = new PieOrderItem(pieSize, pie);
+        pieOrderItem.setId(1L);
+        PieOrderItem pieOrderItem1 = new PieOrderItem(pieSize, pie2);
+        pieOrderItem1.setId(2L);
+        Set<PieOrderItem> pieList = Set.of(pieOrderItem, pieOrderItem1);
+
+        Order order = new Order(2L, 223L, false, false,
+                user, new HashSet<>(), pieList, new HashSet<>());
+        orderRepo.saveAndFlush(order);
+
+        assertThat(orderRepo.existsById(2L)).isTrue();
 
     }
 }
