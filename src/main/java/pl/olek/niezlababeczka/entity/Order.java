@@ -49,4 +49,6 @@ public class Order extends ParentEntity {
         super(UUID.randomUUID());
     }
 
+    public <E> Order(long l, boolean b, boolean b1, User user, HashSet<E> es, HashSet<E> es1, Set<SweetOrderItem> sweets) {
+    }
 }

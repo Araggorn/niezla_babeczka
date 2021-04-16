@@ -9,5 +9,5 @@ import java.util.UUID;
 @Repository
 public interface PieSizeRepo extends JpaRepository <PieSize, Long> {
 
-    PieSize getOne(UUID id);
+    PieSize getById(UUID id);
 }

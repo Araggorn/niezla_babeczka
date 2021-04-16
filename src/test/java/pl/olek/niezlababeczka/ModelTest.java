@@ -42,6 +42,7 @@ public class ModelTest {
     @Test
     void shouldSaveUser() {
         User user = new User("Kuba", "qbeczek@o2.pl", "aaa", new HashSet<>(), "ROLE_ADMIN");
+        user.setId(UUID.randomUUID());
         userRepo.saveAndFlush(user);
 
 
@@ -52,6 +53,7 @@ public class ModelTest {
     @Test
     void shouldSaveCake() {
         Cake cake = new Cake(170.99, 12.0);
+        cake.setId(UUID.randomUUID());
         cakeRepo.saveAndFlush(cake);
         assertThat(cakeRepo.findAll()).contains(cake);
     }
@@ -75,8 +77,9 @@ public class ModelTest {
         User user = new User("Kuba", "qbeczek@o2.pl", "aaa", new HashSet<>(), "ROLE_ADMIN");
         user.setId(UUID.randomUUID());
         userRepo.save(user);
-        Order newOrder = new Order(UUID.randomUUID(), 19828916L, true, true,
+        Order newOrder = new Order(19828916L, true, true,
                 user, null, null, lolipops);
+        newOrder.setId(UUID.randomUUID());
         orderRepo.saveAndFlush(newOrder);
 
         assertThat(orderRepo.existsById(newOrder.getId())).isTrue();
@@ -85,21 +88,28 @@ public class ModelTest {
     @Test
     void shouldCountOrders() {
         Sweet lolipop = new Sweet(3.00, "lolipop");
+        lolipop.setId(UUID.randomUUID());
         sweetRepo.save(lolipop);
         Set<SweetOrderItem> lolipops = new HashSet<>();
         SweetOrderItem sweetOrderItem = new SweetOrderItem(80, lolipop);
+        sweetOrderItem.setId(UUID.randomUUID());
         lolipops.add(sweetOrderItem);
         User user = new User("Kuba", "qbeczek@o2.pl", "aaa", new HashSet<>(), "ROLE_ADMIN");
+        user.setId(UUID.randomUUID());
         userRepo.save(user);
-        Order newOrder = new Order(UUID.randomUUID(), 19828916L, true, true,
+        Order newOrder = new Order( 19828916L, true, true,
                 user, null, null, lolipops);
+        newOrder.setId(UUID.randomUUID());
+
         orderRepo.saveAndFlush(newOrder);
-        assertThat(orderRepo.getByOrderNumber(19828916L).getSweetOrderItems().size()).isEqualTo(1);
+        assertThat(orderRepo.existsById(newOrder.getId())).isTrue();
+        assertThat(orderRepo.findAll().size()).isEqualTo(1);
     }
 
     @Test
     void shouldSaveLayerTaste() {
         LayerTaste lt = new LayerTaste("orange");
+        lt.setId(UUID.randomUUID());
         layerTasteRepo.save(lt);
         String orange = "orange";
         assertThat(layerTasteRepo.existsByTaste(orange)).isTrue();
@@ -108,6 +118,7 @@ public class ModelTest {
     @Test
     void shouldSavePie() {
         Pie pie = new Pie(99.00, "Apple Pie", "Delicious pie with layer of apple sauce");
+        pie.setId(UUID.randomUUID());
         pieR.save(pie);
         assertThat(pieR.existsById(pie.getId())).isTrue();
     }
@@ -115,52 +126,53 @@ public class ModelTest {
     @Test
     void shouldSavePieSizeAndCheckIfItIsBlank() {
         PieSize ps = new PieSize("The pie is round with radius = 10cm");
+        ps.setId(UUID.randomUUID());
         pieSizeRepo.save(ps);
-        assertThat(pieSizeRepo.getOne(ps.getId()).getDescription()).isNotBlank();
+        assertThat(pieSizeRepo.getById(ps.getId()).getDescription()).isNotBlank();
     }
 
     @Test
     void shouldSaveComplexOrder() {
         User user = new User("Olek", "olek@olek.pl", "olo", new LinkedHashSet<>(), "ROLE_USER");
-      //  user.setId(1L);
+        user.setId(UUID.randomUUID());
         userRepo.saveAndFlush(user);
 
         Sweet candy = new Sweet(9.00, "candy");
-      //  candy.setId(1L);
+        candy.setId(UUID.randomUUID());
         sweetRepo.save(candy);
 
         Sweet loli = new Sweet(5.00, "lolipops");
-      //  loli.setId(2L);
+        loli.setId(UUID.randomUUID());
         sweetRepo.save(loli);
 
         SweetOrderItem lolipops = new SweetOrderItem(10, loli);
-      //  lolipops.setId(1L);
+        lolipops.setId(UUID.randomUUID());
 
         SweetOrderItem candies = new SweetOrderItem(50, candy);
-     //   candies.setId(2L);
+        candies.setId(UUID.randomUUID());
 
         Set<SweetOrderItem> sweets = new HashSet<>();
         sweets.add(lolipops);
         sweets.add(candies);
 
         Cake cake = new Cake(160.00, 16.0);
-     //   cake.setId(3L);
+       cake.setId(UUID.randomUUID());
         cakeRepo.saveAndFlush(cake);
 
         LayerTaste lt = new LayerTaste("orange");
-     //   lt.setId(1L);
+       lt.setId(UUID.randomUUID());
         layerTasteRepo.saveAndFlush(lt);
 
         LayerTaste lt2 = new LayerTaste("nuts");
-      //  lt2.setId(2L);
+        lt2.setId(UUID.randomUUID());
         layerTasteRepo.saveAndFlush(lt2);
 
         LayerTaste lt3 = new LayerTaste("chocolate");
-     //   lt3.setId(3L);
+        lt3.setId(UUID.randomUUID());
         layerTasteRepo.saveAndFlush(lt3);
 
         CakeOrderItem cakeOrderItem = new CakeOrderItem();
-     //   cakeOrderItem.setId(3L);
+        cakeOrderItem.setId(UUID.randomUUID());
         CakeLayer cakeLayer1 = new CakeLayer(cakeOrderItem, lt);
         CakeLayer cakeLayer2 = new CakeLayer(cakeOrderItem, lt2);
         CakeLayer cakeLayer3 = new CakeLayer(cakeOrderItem, lt3);
@@ -193,6 +205,7 @@ public class ModelTest {
         //making an order;
         Order order = new Order(UUID.randomUUID(), 1234L, false, false, user,
                 Collections.singleton(cakeOrderItem), pieList, sweets);
+        order.setId(UUID.randomUUID());
         orderRepo.saveAndFlush(order);
 
         List<Order> orders = orderRepo.findAll();
@@ -204,10 +217,13 @@ public class ModelTest {
     @Test
     void shouldSaveMoreThanOneSweets() {
         User user = new User("Olek", "olek@olek.pl", "olo", new LinkedHashSet<>(), "ROLE_USER");
+        user.setId(UUID.randomUUID());
         userRepo.saveAndFlush(user);
         Sweet candy = new Sweet(9.00, "strawberry candy");
+        candy.setId(UUID.randomUUID());
         sweetRepo.save(candy);
         Sweet loli = new Sweet(5.00, "strawberry lolipops");
+        loli.setId(UUID.randomUUID());
         sweetRepo.save(loli);
         SweetOrderItem lolipops = new SweetOrderItem(10, loli);
         lolipops.setId(UUID.randomUUID());
@@ -216,21 +232,26 @@ public class ModelTest {
         Set<SweetOrderItem> sweets = new HashSet<>();
         sweets.add(lolipops);
         sweets.add(candies);
-        Order order = new Order(UUID.randomUUID(), 222L, false, false, user, new HashSet<>(), new HashSet<>(), sweets);
+        Order order = new Order(222L, false, false, user, new HashSet<>(), new HashSet<>(), sweets);
+        order.setId(UUID.randomUUID());
         orderRepo.saveAndFlush(order);
 
-        assertThat(orderRepo.existsById(1L)).isTrue();
+        assertThat(orderRepo.existsById(order.getId())).isTrue();
     }
 
     @Test
     void shouldUseOnePieSizeInTwoPieOrderItems() {
         User user = new User("Olek", "olek@olek.pl", "olo", new LinkedHashSet<>(), "ROLE_USER");
+        user.setId(UUID.randomUUID());
         userRepo.saveAndFlush(user);
         Pie pie = new Pie(150.00, "cheesecake", "it's not a pie, but for this purpose it is");
+        pie.setId(UUID.randomUUID());
         pieR.saveAndFlush(pie);
         PieSize pieSize = new PieSize("big: 40cm * 30cm");
+        pieSize.setId(UUID.randomUUID());
         pieSizeRepo.saveAndFlush(pieSize);
         Pie pie2 = new Pie(125.00, "apple pie", "it's delicious pie");
+        pie2.setId(UUID.randomUUID());
         pieR.saveAndFlush(pie2);
         PieOrderItem pieOrderItem = new PieOrderItem(pieSize, pie);
         pieOrderItem.setId(UUID.randomUUID());
@@ -240,6 +261,7 @@ public class ModelTest {
 
         Order order = new Order(UUID.randomUUID(), 223L, false, false,
                 user, new HashSet<>(), pieList, new HashSet<>());
+        order.setId(UUID.randomUUID());
         orderRepo.saveAndFlush(order);
 
         assertThat(orderRepo.existsById(order.getId())).isTrue();
