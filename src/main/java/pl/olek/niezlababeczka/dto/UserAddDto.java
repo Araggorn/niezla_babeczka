@@ -5,13 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import pl.olek.niezlababeczka.entity.User;
 
+import java.util.UUID;
+
 
 @Data
 @AllArgsConstructor
 @Builder
 public class UserAddDto {
 
-private Long id;
+private UUID id;
 private String login;
 private String email;
 private String password;

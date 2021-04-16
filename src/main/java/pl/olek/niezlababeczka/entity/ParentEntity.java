@@ -2,13 +2,15 @@ package pl.olek.niezlababeczka.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.UUID;
 
 @MappedSuperclass
 @Data
@@ -18,7 +20,7 @@ public abstract class ParentEntity {
     @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    protected Long id;
+    protected UUID id;
 
     @CreationTimestamp
     private LocalDateTime createTime;
@@ -28,11 +30,14 @@ public abstract class ParentEntity {
 
     private boolean deleted;
 
-    public ParentEntity() {
+    public ParentEntity(UUID id) {
     }
 
     public ParentEntity(Long id) {
-        this.id = id;
+        this.id = UUID.randomUUID();
+    }
+
+    protected ParentEntity() {
     }
 
     @Override

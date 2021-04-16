@@ -1,16 +1,18 @@
 package pl.olek.niezlababeczka.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @Table(name = "orders")
 public class Order extends ParentEntity {
 
@@ -32,7 +34,7 @@ public class Order extends ParentEntity {
     @OneToMany (mappedBy = "order", cascade = CascadeType.ALL)
     private Set<SweetOrderItem> sweetOrderItems = new HashSet<>();
 
-    public Order(Long id, Long orderNumber, boolean confirmed, boolean realized, User user, Set<CakeOrderItem> cakeOrderItems, Set<PieOrderItem> pieOrderItems, Set<SweetOrderItem> sweetOrderItems) {
+    public Order(UUID id, Long orderNumber, boolean confirmed, boolean realized, User user, Set<CakeOrderItem> cakeOrderItems, Set<PieOrderItem> pieOrderItems, Set<SweetOrderItem> sweetOrderItems) {
         super(id);
         this.orderNumber = orderNumber;
         this.confirmed = confirmed;
@@ -42,4 +44,9 @@ public class Order extends ParentEntity {
         this.pieOrderItems = pieOrderItems;
         this.sweetOrderItems = sweetOrderItems;
     }
+
+    public Order() {
+        super(UUID.randomUUID());
+    }
+
 }

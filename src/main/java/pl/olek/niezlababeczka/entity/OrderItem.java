@@ -4,7 +4,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -17,5 +17,6 @@ public class OrderItem extends ParentEntity {
     private Order order;
 
     public OrderItem() {
+        super(UUID.randomUUID());
     }
 }

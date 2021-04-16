@@ -6,13 +6,13 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -40,5 +40,15 @@ public class User extends ParentEntity {
     private String role = "ROLE_USER";
 
 
+    public User(String login, String mail, String password, Set<Order> orders, String role) {
+        super(UUID.randomUUID());
+        this.login = login;
+        this.mail = mail;
+        this.password = password;
+        this.orders = orders;
+        this.role = role;
+    }
 
+    public User() {
+    }
 }
