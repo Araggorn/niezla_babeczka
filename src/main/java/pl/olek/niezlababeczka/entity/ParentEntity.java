@@ -18,7 +18,6 @@ import java.util.UUID;
 public abstract class ParentEntity {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     protected UUID id;
 
@@ -31,13 +30,11 @@ public abstract class ParentEntity {
     private boolean deleted;
 
     public ParentEntity(UUID id) {
-    }
-
-    public ParentEntity(Long id) {
-        this.id = UUID.randomUUID();
+        this.id = id;
     }
 
     protected ParentEntity() {
+        this.id = UUID.randomUUID();
     }
 
     @Override
