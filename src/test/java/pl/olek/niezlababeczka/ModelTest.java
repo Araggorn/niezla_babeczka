@@ -267,4 +267,66 @@ public class ModelTest {
         assertThat(orderRepo.existsById(order.getId())).isTrue();
 
     }
+
+    @Test
+    void shouldSaveLayerTaste2() {
+        LayerTaste layerTaste = new LayerTaste("mango");
+        layerTaste.setId(UUID.randomUUID());
+        layerTasteRepo.saveAndFlush(layerTaste);
+
+        assertThat(layerTasteRepo.existsByTaste("mango")).isTrue();
+
+    }
+
+    @Test
+    void shouldSaveTwoDifferentCakes() {
+        Cake cake = new Cake (1000.00, 40.6);
+        Cake cake2 = new Cake (280.00, 15.0);
+        cake.setId(UUID.randomUUID());
+        cake2.setId(UUID.randomUUID());
+        cakeRepo.saveAndFlush(cake);
+        cakeRepo.saveAndFlush(cake2);
+
+        LayerTaste lt1 = new LayerTaste("strawberry");
+        lt1.setId(UUID.randomUUID());
+        layerTasteRepo.saveAndFlush(lt1);
+        LayerTaste lt2 = new LayerTaste("chocolate");
+        lt2.setId(UUID.randomUUID());
+        layerTasteRepo.saveAndFlush(lt2);
+        LayerTaste lt3 = new LayerTaste("raspberry");
+        lt3.setId(UUID.randomUUID());
+        layerTasteRepo.saveAndFlush(lt3);
+
+
+        CakeLayer cl1 = new CakeLayer(lt1);
+        cl1.setId(UUID.randomUUID());
+        CakeLayer cl2 = new CakeLayer(lt2);
+        cl2.setId(UUID.randomUUID());
+        CakeLayer cl3 = new CakeLayer(lt3);
+        cl3.setId(UUID.randomUUID());
+
+        Set<CakeLayer> cakeLayerSet = Set.of(cl1,cl2,cl3);
+
+        CakeOrderItem cakeOrderItem = new CakeOrderItem(20, cakeLayerSet, cake);
+        cakeOrderItem.setId(UUID.randomUUID());
+        CakeOrderItem cakeOrderItem2 = new CakeOrderItem(16, cakeLayerSet, cake2);
+        cakeOrderItem2.setId(UUID.randomUUID());
+
+        Set<CakeOrderItem> cakeOrderItems = new HashSet<>();
+        cakeOrderItems.add(cakeOrderItem);
+        cakeOrderItems.add(cakeOrderItem2);
+
+
+        User user = new User("Olek", "olek@olek.pl", "olo", new LinkedHashSet<>(), "ROLE_USER");
+        user.setId(UUID.randomUUID());
+        userRepo.saveAndFlush(user);
+
+        Order order = new Order(UUID.randomUUID(), 223L, false, false,
+                user, cakeOrderItems, new HashSet<>(), new HashSet<>());
+        order.setId(UUID.randomUUID());
+        orderRepo.saveAndFlush(order);
+
+        assertThat(orderRepo.existsById(order.getId())).isTrue();
+
+    }
 }

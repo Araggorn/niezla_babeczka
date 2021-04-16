@@ -29,4 +29,8 @@ public class CakeLayer extends ParentEntity {
 
     public CakeLayer() {
     }
+
+    public CakeLayer(LayerTaste layerTaste) {
+        this.layerTaste = layerTaste;
+    }
 }

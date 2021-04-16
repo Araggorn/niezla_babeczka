@@ -20,4 +20,12 @@ public class CakeOrderItem extends OrderItem {
     @JoinColumn(name = "cake_id")
     private Cake cake;
 
+    public CakeOrderItem(int numberOfPortions, Set<CakeLayer> layerTaste, Cake cake) {
+        this.numberOfPortions = numberOfPortions;
+        this.layerTaste = layerTaste;
+        this.cake = cake;
+    }
+
+    public CakeOrderItem() {
+    }
 }
