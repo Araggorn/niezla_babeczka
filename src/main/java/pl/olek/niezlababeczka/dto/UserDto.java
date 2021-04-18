@@ -16,7 +16,7 @@ public class UserDto {
     private String login;
     private String email;
 
-    public static UserDto of(User userSaved) {
+    public static UserDto toDto(User userSaved) {
         return UserDto.builder()
                 .id(userSaved.getId())
                 .login(userSaved.getLogin())

@@ -6,7 +6,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.olek.niezlababeczka.dto.UserAddDto;
 import pl.olek.niezlababeczka.dto.UserDto;
-import pl.olek.niezlababeczka.dto.UserShowDto;
 import pl.olek.niezlababeczka.entity.User;
 import pl.olek.niezlababeczka.repository.UserRepo;
 
@@ -40,21 +39,21 @@ public class UserService {
         user.setDeleted(false);
         User userSaved = userRepo.save(user);
         log.info("added user with id{}", userSaved.getId());
-        return UserDto.of(userSaved);
+        return UserDto.toDto(userSaved);
     }
 
-    public List<UserShowDto> showAllUsers() {
+    public List<UserDto> showAllUsers() {
         log.info("Show list of users");
         return userRepo.findAllByDeletedIsFalse()
                 .stream()
-                .map(UserShowDto::toDto)
+                .map(UserDto::toDto)
                 .collect(Collectors.toList());
     }
 
-    public Optional<UserShowDto> findById(Long id) {
+    public Optional<UserDto> findById(Long id) {
         log.info("We are looking for user wiht id: {}", id);
 
-        return userRepo.findById(id).map(UserShowDto::toDto);
+        return userRepo.findById(id).map(UserDto::toDto);
     }
 
     public void deleteById(Long id) {
@@ -73,7 +72,7 @@ public class UserService {
 
         User savedUser = userRepo.save(user);
         log.info("updated note with id: {}", savedUser.getId());
-        return UserDto.of(savedUser);
+        return UserDto.toDto(savedUser);
     }
 
 }

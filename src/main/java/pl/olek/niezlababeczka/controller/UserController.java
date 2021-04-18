@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.olek.niezlababeczka.dto.UserAddDto;
 import pl.olek.niezlababeczka.dto.UserDto;
-import pl.olek.niezlababeczka.dto.UserShowDto;
 import pl.olek.niezlababeczka.service.UserService;
 
 import javax.annotation.PostConstruct;
@@ -25,12 +24,12 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserShowDto> usersList() {
+    public List<UserDto> usersList() {
         return userService.showAllUsers();
     }
 
     @GetMapping("/{id:\\d+}")
-    public ResponseEntity<UserShowDto> getUserById(@PathVariable("id") Long id){
+    public ResponseEntity<UserDto> getUserById(@PathVariable("id") Long id){
         return userService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

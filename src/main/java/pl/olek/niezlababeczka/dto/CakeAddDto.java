@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import pl.olek.niezlababeczka.entity.Cake;
 
 @Setter
 @Getter
@@ -16,13 +15,13 @@ public class CakeAddDto {
     private double price;
     private int numberOfPortions;
 
-    public static CakeAddDto toDto (Cake cake) {
-        return CakeAddDto.builder()
-                .radius(cake.getRadius())
-                .price(cake.getPrice())
-                .numberOfPortions(cake.getNumberOfPortions)
-                .build();
-
-    }
+//    public static CakeAddDto toDto (Cake cake) {
+//        return CakeAddDto.builder()
+//                .radius(cake.getRadius())
+//                .price(cake.getPrice())
+//                .numberOfPortions(cake.getNumberOfPortions)
+//                .build();
+//
+//    }
 
 }

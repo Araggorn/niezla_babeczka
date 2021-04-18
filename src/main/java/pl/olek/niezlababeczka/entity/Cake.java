@@ -12,11 +12,11 @@ import javax.persistence.Entity;
 @Builder
 public class Cake extends Product {
 
+    private Double radius;
+
     public Cake(Double price, Double radius) {
         super(price);
         this.radius = radius;
     }
-
-    private Double radius;
 
 }

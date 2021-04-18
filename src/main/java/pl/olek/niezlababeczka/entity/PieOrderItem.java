@@ -17,10 +17,10 @@ public class PieOrderItem extends OrderItem {
     @JoinColumn(name = "pie_size_id")
     private PieSize pieSize;
 
-
     @ManyToOne
     @JoinColumn(name = "pie_id")
     private Pie pie;
+
 
     @Override
     public String toString() {
