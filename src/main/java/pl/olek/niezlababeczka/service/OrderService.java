@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 @Transactional
 public class OrderService {
 
-    OrderRepo orderRepo;
+   private final OrderRepo orderRepo;
 
     @Autowired
     public OrderService(OrderRepo orderRepo) {

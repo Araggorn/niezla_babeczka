@@ -6,7 +6,7 @@ import pl.olek.niezlababeczka.repository.ProductRepo;
 @Service
 public class ProductService {
 
-    ProductRepo productRepo;
+    private final ProductRepo productRepo;
 
     public ProductService(ProductRepo productRepo) {
         this.productRepo = productRepo;

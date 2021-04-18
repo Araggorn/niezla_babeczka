@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Cake extends Product {
 
     public Cake(Double price, Double radius) {
