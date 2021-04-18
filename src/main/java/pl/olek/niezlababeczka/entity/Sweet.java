@@ -14,7 +14,7 @@ public class Sweet extends Product {
     private String name;
 
     public Sweet(Double price, String name) {
-        super(price);
+        super();
         this.name = name;
     }
 }

@@ -15,7 +15,7 @@ public class Cake extends Product {
     private Double radius;
 
     public Cake(Double price, Double radius) {
-        super(price);
+        super();
         this.radius = radius;
     }
 

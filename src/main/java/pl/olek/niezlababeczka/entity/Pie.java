@@ -15,7 +15,7 @@ public class Pie extends Product{
     private String description;
 
     public Pie(Double price, String name, String description) {
-        super(price);
+        super();
         this.name = name;
         this.description = description;
     }

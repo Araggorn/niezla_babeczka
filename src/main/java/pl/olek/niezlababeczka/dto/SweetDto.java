@@ -15,7 +15,6 @@ public class SweetDto {
     public static SweetDto toDto (Sweet sweet){
         return SweetDto.builder()
                 .name(sweet.getName())
-                .price(sweet.getPrice())
                 .build();
     }
 }

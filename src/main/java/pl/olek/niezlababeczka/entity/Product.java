@@ -1,7 +1,6 @@
 package pl.olek.niezlababeczka.entity;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -12,14 +11,10 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Product extends ParentEntity {
 
-    private Double price;
-
-    public Product(Double price) {
+    public Product() {
         super(UUID.randomUUID());
-        this.price = price;
     }
 }
