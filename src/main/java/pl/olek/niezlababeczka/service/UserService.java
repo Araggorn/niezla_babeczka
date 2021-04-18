@@ -51,7 +51,7 @@ public class UserService {
     }
 
     public Optional<UserDto> findById(Long id) {
-        log.info("We are looking for user wiht id: {}", id);
+        log.info("We are looking for user with id: {}", id);
 
         return userRepo.findById(id).map(UserDto::toDto);
     }
