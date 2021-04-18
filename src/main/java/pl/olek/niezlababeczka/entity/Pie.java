@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pie extends Product{
+public class Pie extends Product {
 
     private String name;
     private String description;
