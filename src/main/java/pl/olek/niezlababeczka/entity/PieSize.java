@@ -1,5 +1,6 @@
 package pl.olek.niezlababeczka.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
+@Builder
 public class PieSize extends ParentEntity{
 
     private String description; //ex. 24x24 , średnica:15cm, 36x24cm;

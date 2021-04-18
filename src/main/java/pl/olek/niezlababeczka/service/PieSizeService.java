@@ -2,9 +2,15 @@ package pl.olek.niezlababeczka.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import pl.olek.niezlababeczka.dto.PieSizeDto;
+import pl.olek.niezlababeczka.entity.PieSize;
 import pl.olek.niezlababeczka.repository.PieSizeRepo;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -15,5 +21,35 @@ public class PieSizeService {
 
     public PieSizeService(PieSizeRepo pieSizeRepo) {
         this.pieSizeRepo = pieSizeRepo;
+    }
+
+    public PieSizeDto addPieSize(PieSizeDto pieSizeDto) {
+        PieSize pieSize = PieSize.builder()
+                .description(pieSizeDto.getDescription())
+                .build();
+        PieSize pieSSav = pieSizeRepo.save(pieSize);
+        pieSize.setId(UUID.randomUUID());
+        log.info("added pie with id{}", pieSSav.getId());
+        return PieSizeDto.toDto(pieSSav);
+    }
+
+    public List<PieSizeDto> showAllPies() {
+        log.info("Show list of pies");
+        return pieSizeRepo.findAll()
+                .stream()
+                .map(PieSizeDto::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public void deleteById(Long id) {
+        log.info("Deleting pie by id: {}", id);
+        PieSize pieSize = pieSizeRepo.getOne(id);
+        pieSize.setDeleted(true);
+        pieSizeRepo.save(pieSize);
+    }
+
+    public Optional<PieSizeDto> findById(Long id) {
+        log.info("We are looking for pie with id: {}", id);
+        return pieSizeRepo.findById(id).map(PieSizeDto::toDto);
     }
 }
