@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.olek.niezlababeczka.dto.UserAddDto;
+import pl.olek.niezlababeczka.dto.UserDto;
 import pl.olek.niezlababeczka.dto.UserShowDto;
 import pl.olek.niezlababeczka.entity.User;
 import pl.olek.niezlababeczka.repository.UserRepo;
@@ -12,6 +13,7 @@ import pl.olek.niezlababeczka.repository.UserRepo;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,16 +30,17 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public UserAddDto addUser(UserAddDto userAddDto){
+    public UserDto addUser(UserAddDto userAddDto) {
         User user = User.builder()
+                .id(UUID.randomUUID())
                 .login(userAddDto.getLogin())
                 .mail(userAddDto.getEmail())
                 .password(passwordEncoder.encode(userAddDto.getPassword()))
                 .build();
         user.setDeleted(false);
         User userSaved = userRepo.save(user);
-        log.info("added user with id{}",userSaved.getId());
-        return UserAddDto.toDto(userSaved);
+        log.info("added user with id{}", userSaved.getId());
+        return UserDto.of(userSaved);
     }
 
     public List<UserShowDto> showAllUsers() {
@@ -48,20 +51,20 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<UserShowDto> findById(Long id){
+    public Optional<UserShowDto> findById(Long id) {
         log.info("We are looking for user wiht id: {}", id);
 
         return userRepo.findById(id).map(UserShowDto::toDto);
     }
 
-    public void deleteById (Long id) {
+    public void deleteById(Long id) {
         log.info("Deleting user id: {}", id);
         User user = userRepo.getOne(id);
         user.setDeleted(true);
         userRepo.save(user);
     }
 
-    public UserAddDto updateUser(UserAddDto addDto, Long id) {
+    public UserDto updateUser(UserAddDto addDto, Long id) {
         User user = userRepo.getOne(id);
         log.info("updating user id {}", user.getId());
         user.setLogin(addDto.getLogin());
@@ -70,7 +73,7 @@ public class UserService {
 
         User savedUser = userRepo.save(user);
         log.info("updated note with id: {}", savedUser.getId());
-        return UserAddDto.toDto(savedUser);
+        return UserDto.of(savedUser);
     }
 
 }

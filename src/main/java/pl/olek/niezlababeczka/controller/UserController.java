@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.olek.niezlababeczka.dto.UserAddDto;
+import pl.olek.niezlababeczka.dto.UserDto;
 import pl.olek.niezlababeczka.dto.UserShowDto;
 import pl.olek.niezlababeczka.service.UserService;
 
@@ -36,8 +37,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserAddDto> userAdd (@RequestBody UserAddDto userAddDto){
-        UserAddDto savedUser = userService.addUser(userAddDto);
+    public ResponseEntity<UserDto> userAdd (@RequestBody UserAddDto userAddDto){
+        UserDto savedUser = userService.addUser(userAddDto);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -54,8 +55,8 @@ public class UserController {
     }
 
     @PutMapping("/{id:\\d+}")
-    public ResponseEntity<UserAddDto> editUser (@RequestBody UserAddDto userDto, @PathVariable("id") Long id){
-        UserAddDto user = userService.updateUser(userDto, id);
+    public ResponseEntity<UserDto> editUser (@RequestBody UserAddDto userDto, @PathVariable("id") Long id){
+        UserDto user = userService.updateUser(userDto, id);
         return ResponseEntity.ok(user);
     }
 

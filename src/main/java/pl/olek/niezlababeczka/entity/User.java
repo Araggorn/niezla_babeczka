@@ -1,6 +1,7 @@
 package pl.olek.niezlababeczka.entity;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -12,7 +13,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Builder
+@SuperBuilder
 @Getter
 @Setter
 @ToString

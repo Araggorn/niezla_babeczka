@@ -1,7 +1,9 @@
 package pl.olek.niezlababeczka.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,6 +17,7 @@ import java.util.UUID;
 @MappedSuperclass
 @Data
 @AllArgsConstructor
+@SuperBuilder
 public abstract class ParentEntity {
 
     @Id
