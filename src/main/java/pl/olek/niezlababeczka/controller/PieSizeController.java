@@ -8,6 +8,7 @@ import pl.olek.niezlababeczka.dto.PieSizeDto;
 import pl.olek.niezlababeczka.service.PieSizeService;
 
 import java.net.URI;
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -45,5 +46,10 @@ public class PieSizeController {
         pieSizeService.deleteById(id);
         log.info("Request to delete pieSize id: {}", id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public List<PieSizeDto> pieSizeList() {
+        return pieSizeService.showAllPieSizes();
     }
 }

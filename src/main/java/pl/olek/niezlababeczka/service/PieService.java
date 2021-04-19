@@ -37,7 +37,7 @@ public class PieService {
 
     public List<PieDto> showAllPies() {
         log.info("Show list of pies");
-        return pieRepo.findAll()
+        return pieRepo.getAllByDeletedIsFalse()
                 .stream()
                 .map(PieDto::toDto)
                 .collect(Collectors.toList());

@@ -4,8 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import pl.olek.niezlababeczka.dto.PieDto;
-import pl.olek.niezlababeczka.service.PieService;
+import pl.olek.niezlababeczka.dto.PieOfferDto;
+import pl.olek.niezlababeczka.service.PieOfferService;
 
 import java.net.URI;
 import java.util.List;
@@ -13,25 +13,25 @@ import java.util.UUID;
 
 @Slf4j
 @RestController
-@RequestMapping(path = "/v1/pie")
-public class PieController {
+@RequestMapping(path = "/v1/pieoffer")
+public class PieOfferController {
 
-    private final PieService pieService;
+    PieOfferService pieOfferService;
 
-    public PieController(PieService pieService) {
-        this.pieService = pieService;
+    public PieOfferController(PieOfferService pieOfferService) {
+        this.pieOfferService = pieOfferService;
     }
 
     @GetMapping("/{id:\\d+}")
-    public ResponseEntity<PieDto> getPieById(@PathVariable("id") UUID id) {
-        return pieService.findById(id)
+    public ResponseEntity<PieOfferDto> getPieOfferById(@PathVariable("id") UUID id) {
+        return pieOfferService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<PieDto> pieAdd(@RequestBody PieDto pieDto) {
-        PieDto savedPie = pieService.addPie(pieDto);
+    public ResponseEntity<PieOfferDto> pieAdd(@RequestBody PieOfferDto pieODto) {
+        PieOfferDto savedPie = pieOfferService.addPieOffer(pieODto);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -42,14 +42,13 @@ public class PieController {
 
     @DeleteMapping("/{id:\\d+}")
     public ResponseEntity<?> deletePie(@PathVariable UUID id) {
-        pieService.deleteById(id);
-        log.info("Request to delete pie id: {}", id);
+        pieOfferService.deleteById(id);
+        log.info("deleting pieOffer id: {}", id);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping
-    public List<PieDto> piesList() {
-        return pieService.showAllPies();
+    public List<PieOfferDto> pieOfferList() {
+        return pieOfferService.showAllPieOffers();
     }
-
 }

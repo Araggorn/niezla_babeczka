@@ -1,9 +1,6 @@
 package pl.olek.niezlababeczka.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Columns;
 import org.hibernate.annotations.Type;
 import org.joda.money.Money;
@@ -17,6 +14,7 @@ import javax.persistence.ManyToOne;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class PieOffer extends ParentEntity{
 
     @ManyToOne
@@ -28,4 +26,6 @@ public class PieOffer extends ParentEntity{
     @Columns(columns = {@Column(name = "price_currency"), @Column(name = "price_amount")})
     @Type(type = "org.jadira.usertype.moneyandcurrency.joda.PersistentMoneyAmountAndCurrency")
     private Money price;
+
+
 }

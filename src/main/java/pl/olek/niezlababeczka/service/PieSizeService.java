@@ -33,9 +33,9 @@ public class PieSizeService {
         return PieSizeDto.toDto(pieSSav);
     }
 
-    public List<PieSizeDto> showAllPies() {
+    public List<PieSizeDto> showAllPieSizes() {
         log.info("Show list of pies");
-        return pieSizeRepo.findAll()
+        return pieSizeRepo.getAllByDeletedIsFalse()
                 .stream()
                 .map(PieSizeDto::toDto)
                 .collect(Collectors.toList());
