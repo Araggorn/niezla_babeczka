@@ -41,14 +41,14 @@ public class PieSizeService {
                 .collect(Collectors.toList());
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(UUID id) {
         log.info("Deleting pie by id: {}", id);
         PieSize pieSize = pieSizeRepo.getOne(id);
         pieSize.setDeleted(true);
         pieSizeRepo.save(pieSize);
     }
 
-    public Optional<PieSizeDto> findById(Long id) {
+    public Optional<PieSizeDto> findById(UUID id) {
         log.info("We are looking for pie with id: {}", id);
         return pieSizeRepo.findById(id).map(PieSizeDto::toDto);
     }

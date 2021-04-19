@@ -7,7 +7,7 @@ import pl.olek.niezlababeczka.entity.Pie;
 import java.util.UUID;
 
 @Repository
-public interface PieRepo extends JpaRepository <Pie, Long> {
+public interface PieRepo extends JpaRepository <Pie, UUID> {
 
     boolean existsById(UUID id);
 

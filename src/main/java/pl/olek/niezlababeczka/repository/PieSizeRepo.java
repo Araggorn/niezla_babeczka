@@ -7,7 +7,7 @@ import pl.olek.niezlababeczka.entity.PieSize;
 import java.util.UUID;
 
 @Repository
-public interface PieSizeRepo extends JpaRepository <PieSize, Long> {
+public interface PieSizeRepo extends JpaRepository <PieSize, UUID> {
 
     PieSize getById(UUID id);
 }
