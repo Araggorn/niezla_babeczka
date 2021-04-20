@@ -28,7 +28,6 @@ public class PieSizeService {
                 .description(pieSizeDto.getDescription())
                 .build();
         PieSize pieSSav = pieSizeRepo.save(pieSize);
-        pieSize.setId(UUID.randomUUID());
         log.info("added pie with id{}", pieSSav.getId());
         return PieSizeDto.toDto(pieSSav);
     }

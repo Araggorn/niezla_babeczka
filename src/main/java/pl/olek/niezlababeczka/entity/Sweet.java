@@ -23,11 +23,16 @@ public class Sweet extends Product {
     @Type(type = "org.jadira.usertype.moneyandcurrency.joda.PersistentMoneyAmountAndCurrency")
     private Money price;
 
-    public Sweet(UUID id, Double price, String name) {
+    public Sweet(UUID id, Money price, String name) {
         super();
+        this.id = id;
         this.name = name;
+        this.price = price;
     }
 
-    public Sweet(double price, String name) {
+    public Sweet(Money price,
+                 String name) {
+        this.price = price;
+        this.name =name;
     }
 }

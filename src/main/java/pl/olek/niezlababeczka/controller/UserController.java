@@ -3,7 +3,14 @@ package pl.olek.niezlababeczka.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.olek.niezlababeczka.dto.UserAddDto;
 import pl.olek.niezlababeczka.dto.UserDto;
@@ -62,9 +69,9 @@ public class UserController {
     @PostConstruct
     void createSampleUser() {
         userService.addUser(UserAddDto.builder()
-        .login("Olek")
-        .email("drednor@o2.pl")
-        .password("xx")
-        .build());
+                .login("Olek")
+                .email("drednor@o2.pl")
+                .password("xx")
+                .build());
     }
 }
