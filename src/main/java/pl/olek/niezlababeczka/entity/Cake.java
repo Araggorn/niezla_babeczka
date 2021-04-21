@@ -7,16 +7,17 @@ import javax.persistence.Entity;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Cake extends Product {
 
-    private Double radius;
+    private Integer numberOfPortions;
+    private String name;
 
-    public Cake(Double price, Double radius) {
+    public Cake(Integer numberOfPortions, String name) {
         super();
-        this.radius = radius;
+        this.numberOfPortions = numberOfPortions;
+        this.name = name;
     }
 
 }

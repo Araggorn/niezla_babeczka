@@ -11,7 +11,7 @@ import java.util.Set;
 @Setter
 public class CakeOrderItem extends OrderItem {
 
-    private int numberOfPortions;
+
 
     @OneToMany (mappedBy = "cakeOrderItem", cascade = CascadeType.ALL)
     private Set<CakeLayer> layerTaste;
@@ -20,8 +20,7 @@ public class CakeOrderItem extends OrderItem {
     @JoinColumn(name = "cake_id")
     private Cake cake;
 
-    public CakeOrderItem(int numberOfPortions, Set<CakeLayer> layerTaste, Cake cake) {
-        this.numberOfPortions = numberOfPortions;
+    public CakeOrderItem(Set<CakeLayer> layerTaste, Cake cake) {
         this.layerTaste = layerTaste;
         this.cake = cake;
     }
