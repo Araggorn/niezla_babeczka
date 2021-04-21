@@ -8,6 +8,8 @@ import pl.olek.niezlababeczka.entity.Pie;
 import pl.olek.niezlababeczka.entity.PieOffer;
 import pl.olek.niezlababeczka.entity.PieSize;
 import pl.olek.niezlababeczka.repository.PieOfferRepo;
+import pl.olek.niezlababeczka.repository.PieRepo;
+import pl.olek.niezlababeczka.repository.PieSizeRepo;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -21,21 +23,27 @@ import java.util.stream.Collectors;
 public class PieOfferService {
 
     private final PieOfferRepo pieOfferRepo;
+    private final PieRepo pieRepo;
+    private final PieSizeRepo pieSizeRepo;
 
-    public PieOfferService(PieOfferRepo pieOfferRepo) {
+    public PieOfferService(PieOfferRepo pieOfferRepo, PieRepo pieRepo, PieSizeRepo pieSizeRepo) {
         this.pieOfferRepo = pieOfferRepo;
+        this.pieRepo = pieRepo;
+        this.pieSizeRepo = pieSizeRepo;
     }
 
 
     public PieOfferDto addPieOffer(PieOfferDto pieOfferDto){
-        Pie pieO = new Pie(pieOfferDto.getPieName(), pieOfferDto.getPieDescription());
-        PieSize pieSizeO = new PieSize(pieOfferDto.getPieSizeDescription());
-        Money money =  Money.of(pieOfferDto.getCurrency(), pieOfferDto.getPriceValue());
+        Pie pie = pieRepo.getOne(pieOfferDto.getPie_id());
+        PieSize pieSize = pieSizeRepo.getOne(pieOfferDto.getPieSize_id());
+        Money money =  Money.of(pieOfferDto.getMoney().getCurrencyUnit(), pieOfferDto.getMoney().getValue());
+
         PieOffer pieOffer = PieOffer.builder()
-                .pie(pieO)
-                .pieSize(pieSizeO)
+                .pie(pie)
+                .pieSize(pieSize)
                 .price(money)
                 .build();
+        
         PieOffer pieOfferSaved = pieOfferRepo.save(pieOffer);
         log.info("adding PieOffer with id {}", pieOffer.getId());
         return PieOfferDto.toDto(pieOfferSaved);

@@ -64,11 +64,10 @@ public class SweetController {
     }
 
     @PostConstruct
-    void createSampleUser() {
-        CurrencyUnit usd = CurrencyUnit.of("USD");
+    void createSampleSweet() {
         sweetService.addSweet(SweetDto.builder()
                 .name("cukiereczki")
-                .currency(usd)
+                .currency(CurrencyUnit.EUR)
                 .priceValue(BigDecimal.valueOf(12.09))
                 .id(UUID.randomUUID())
                 .build());

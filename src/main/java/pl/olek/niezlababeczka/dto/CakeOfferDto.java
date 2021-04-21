@@ -5,8 +5,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pl.olek.niezlababeczka.entity.Cake;
+import pl.olek.niezlababeczka.entity.CakeLayer;
+import pl.olek.niezlababeczka.entity.CakeOffer;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -15,15 +17,17 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 public class CakeOfferDto {
-    private String name;
-    private Integer numberOfPortions;
+    private MoneyDto moneyDto;
+    private UUID cake_id;
+    private Set<CakeLayer> cakeLayerSet;
     private UUID id;
 
-    public static CakeOfferDto toDto (Cake cake) {
+    public static CakeOfferDto toDto (CakeOffer cakeO) {
+        MoneyDto money = new MoneyDto(cakeO.getPrice().getCurrencyUnit(), cakeO.getPrice().getAmount());
         return CakeOfferDto.builder()
-                .id(cake.getId())
-                .name(cake.getName())
-                .numberOfPortions(cake.getNumberOfPortions())
+                .cake_id(cakeO.getCake().getId())
+                .cakeLayerSet(cakeO.getCakeLayers())
+                .moneyDto(money)
                 .build();
 
     }

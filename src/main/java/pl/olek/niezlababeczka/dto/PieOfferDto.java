@@ -1,10 +1,13 @@
 package pl.olek.niezlababeczka.dto;
 
-import lombok.*;
-import org.joda.money.CurrencyUnit;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.olek.niezlababeczka.entity.PieOffer;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 @Getter
@@ -15,21 +18,17 @@ import java.util.UUID;
 @Builder
 public class PieOfferDto {
 
-    private BigDecimal priceValue;
-    private CurrencyUnit currency;
-    private String pieSizeDescription;
-    private String pieName;
-    private String pieDescription;
+    private MoneyDto money;
+    private UUID pieSize_id;
+    private UUID pie_id;
     private UUID id;
 
     public static PieOfferDto toDto(PieOffer pieOffer) {
+        MoneyDto moneyN = new MoneyDto(pieOffer.getPrice().getCurrencyUnit(), pieOffer.getPrice().getAmount());
         return PieOfferDto.builder()
-                .pieDescription(pieOffer.getPie().getDescription())
-                .pieName(pieOffer.getPie().getName())
-                .pieSizeDescription(pieOffer.getPieSize().getDescription())
-                .currency(pieOffer.getPrice().getCurrencyUnit())
-                .priceValue(pieOffer.getPrice().getAmount())
-                .id(pieOffer.getId())
+                .pieSize_id(pieOffer.getPieSize().getId())
+                .pie_id(pieOffer.getPie().getId())
+                .money(moneyN)
                 .build();
 
     }
