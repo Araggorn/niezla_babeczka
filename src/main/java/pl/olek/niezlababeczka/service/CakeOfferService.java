@@ -6,7 +6,6 @@ import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 import org.springframework.stereotype.Service;
 import pl.olek.niezlababeczka.dto.CakeOfferDto;
-import pl.olek.niezlababeczka.entity.Cake;
 import pl.olek.niezlababeczka.entity.CakeOffer;
 import pl.olek.niezlababeczka.repository.CakeOfferRepo;
 import pl.olek.niezlababeczka.repository.CakeRepo;
@@ -32,14 +31,13 @@ public class CakeOfferService {
     }
 
     public CakeOfferDto addCakeOffer(CakeOfferDto cakeOfferDto){
-        Cake cake2 = cakeRepo.getOne(cakeOfferDto.getCake_id());
-        CurrencyUnit currencyUnit = cakeOfferDto.getMoneyDto().getCurrencyUnit();
+        CurrencyUnit unit = cakeOfferDto.getMoneyDto().getCurrencyUnit();
         BigDecimal value = cakeOfferDto.getMoneyDto().getValue();
-        Money money = Money.of(currencyUnit, value);
+
         CakeOffer cakeOffer = CakeOffer.builder()
-                .cake(cake2)
+                .cake(cakeRepo.getOne(cakeOfferDto.getCake_id()))
                 .cakeLayers(cakeOfferDto.getCakeLayerSet())
-                .price(money)
+                .price(Money.of(unit,value))
                 .build();
         CakeOffer cakeOfferSaved = cakeOfferRepo.save(cakeOffer);
         log.info("adding CakeOffer with id {}", cakeOffer.getId());

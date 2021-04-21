@@ -4,9 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.joda.money.Money;
 import org.springframework.stereotype.Service;
 import pl.olek.niezlababeczka.dto.PieOfferDto;
-import pl.olek.niezlababeczka.entity.Pie;
 import pl.olek.niezlababeczka.entity.PieOffer;
-import pl.olek.niezlababeczka.entity.PieSize;
 import pl.olek.niezlababeczka.repository.PieOfferRepo;
 import pl.olek.niezlababeczka.repository.PieRepo;
 import pl.olek.niezlababeczka.repository.PieSizeRepo;
@@ -34,16 +32,13 @@ public class PieOfferService {
 
 
     public PieOfferDto addPieOffer(PieOfferDto pieOfferDto){
-        Pie pie = pieRepo.getOne(pieOfferDto.getPie_id());
-        PieSize pieSize = pieSizeRepo.getOne(pieOfferDto.getPieSize_id());
         Money money =  Money.of(pieOfferDto.getMoney().getCurrencyUnit(), pieOfferDto.getMoney().getValue());
-
         PieOffer pieOffer = PieOffer.builder()
-                .pie(pie)
-                .pieSize(pieSize)
+                .pie(pieRepo.getOne(pieOfferDto.getPie_id()))
+                .pieSize(pieSizeRepo.getOne(pieOfferDto.getPieSize_id()))
                 .price(money)
                 .build();
-        
+
         PieOffer pieOfferSaved = pieOfferRepo.save(pieOffer);
         log.info("adding PieOffer with id {}", pieOffer.getId());
         return PieOfferDto.toDto(pieOfferSaved);
