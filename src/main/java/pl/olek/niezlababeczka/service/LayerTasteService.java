@@ -3,9 +3,7 @@ package pl.olek.niezlababeczka.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.olek.niezlababeczka.dto.CakeDto;
 import pl.olek.niezlababeczka.dto.LayerTasteDto;
-import pl.olek.niezlababeczka.entity.Cake;
 import pl.olek.niezlababeczka.entity.LayerTaste;
 import pl.olek.niezlababeczka.repository.LayerTasteRepo;
 
@@ -46,14 +44,14 @@ public class LayerTasteService {
     }
 
     public void deleteById(UUID id) {
-        log.info("Deleting cake by id: {}", id);
-        Cake cake = cakeRepo.getOne(id);
-        cake.setDeleted(true);
-        cakeRepo.save(cake);
+        log.info("Deleting layer taste by id: {}", id);
+        LayerTaste layerTaste = layerTasteRepo.getOne(id);
+        layerTaste.setDeleted(true);
+        layerTasteRepo.save(layerTaste);
     }
 
-    public Optional<CakeDto> findById(UUID id) {
+    public Optional<LayerTasteDto> findById(UUID id) {
         log.info("We are looking for cake with id: {}", id);
-        return cakeRepo.findById(id).map(CakeDto::toDto);
+        return layerTasteRepo.findById(id).map(LayerTasteDto::toDto);
     }
 }
