@@ -1,6 +1,7 @@
 package pl.olek.niezlababeczka.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.joda.money.CurrencyUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import pl.olek.niezlababeczka.dto.SweetDto;
 import pl.olek.niezlababeczka.service.SweetService;
 
+import javax.annotation.PostConstruct;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
@@ -60,15 +63,15 @@ public class SweetController {
         return sweetService.showAllSweets();
     }
 
-//    @PostConstruct
-//    void createSampleUser() {
-//        CurrencyUnit usd = CurrencyUnit.of("USD");
-//        sweetService.addSweet(SweetDto.builder()
-//                .name("cukiereczki")
-//                .currency(usd)
-//                .priceValue(BigDecimal.valueOf(12.09))
-//                .id(UUID.randomUUID())
-//                .build());
-//    }
+    @PostConstruct
+    void createSampleUser() {
+        CurrencyUnit usd = CurrencyUnit.of("USD");
+        sweetService.addSweet(SweetDto.builder()
+                .name("cukiereczki")
+                .currency(usd)
+                .priceValue(BigDecimal.valueOf(12.09))
+                .id(UUID.randomUUID())
+                .build());
+    }
 }
 
