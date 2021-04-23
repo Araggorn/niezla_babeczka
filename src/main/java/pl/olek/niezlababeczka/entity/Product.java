@@ -2,6 +2,7 @@ package pl.olek.niezlababeczka.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -12,6 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Inheritance(strategy = InheritanceType.JOINED)
+@SuperBuilder
 public class Product extends ParentEntity {
 
     public Product() {

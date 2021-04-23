@@ -1,6 +1,8 @@
 package pl.olek.niezlababeczka.entity;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
+import net.bytebuddy.implementation.bind.annotation.Super;
 
 import javax.persistence.Entity;
 
@@ -8,7 +10,7 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 public class Cake extends Product {
 
     private Integer numberOfPortions;

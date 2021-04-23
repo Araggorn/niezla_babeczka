@@ -1,6 +1,7 @@
 package pl.olek.niezlababeczka.entity;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
 
@@ -9,15 +10,10 @@ import javax.persistence.Entity;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 public class Pie extends Product {
 
     private String name;
     private String description;
 
-    public Pie(Double price, String name, String description) {
-        super();
-        this.name = name;
-        this.description = description;
-    }
 }
