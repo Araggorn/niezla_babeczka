@@ -57,4 +57,19 @@ public class PieOfferController {
     public List<PieOfferDto> pieOfferList() {
         return pieOfferService.showAllPieOffers();
     }
+
+//    @PostConstruct
+//    void createSamplePieOffer() {
+//        Pie pie = new Pie (17.23, "jabłecznik", "pychotka");
+//        PieSize ps = new PieSize("24x24cm");
+//        CurrencyUnit currencyUnit = CurrencyUnit.CAD;
+//        BigDecimal bigDecimal = BigDecimal.valueOf(12L);
+//        MoneyDto moneyDto = new MoneyDto(CurrencyUnit.CAD, BigDecimal.valueOf(123L));
+//        pieOfferService.addPieOffer(PieOfferDto.builder()
+//                .pie_id(pie.getId())
+//                .pieSize_id(ps.getId())
+//                .money(moneyDto)
+//                .id(UUID.randomUUID())
+//                .build());
+//    }
 }

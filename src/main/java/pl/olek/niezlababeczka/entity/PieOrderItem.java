@@ -13,19 +13,17 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 public class PieOrderItem extends OrderItem {
 
-    @ManyToOne
-    @JoinColumn(name = "pie_size_id")
-    private PieSize pieSize;
 
     @ManyToOne
-    @JoinColumn(name = "pie_id")
-    private Pie pie;
+    @JoinColumn(name = "pie_offer_id")
+    private PieOffer pieOffer;
+//    @ManyToOne
+//    @JoinColumn(name = "pie_size_id")
+//    private PieSize pieSize;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "pie_id")
+//    private Pie pie;
 
 
-    @Override
-    public String toString() {
-        return "PieOrderItem{" +
-                "id=" + id +
-                '}';
-    }
 }

@@ -5,3 +5,7 @@ GET http://localhost:8080/v1/users
 GET http://localhost:8080/v1/sweets
 
 ###
+
+GET http://localhost:8080/v1/pieoffers
+
+###
