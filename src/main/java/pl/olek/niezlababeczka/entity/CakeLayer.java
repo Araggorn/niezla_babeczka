@@ -1,16 +1,19 @@
 package pl.olek.niezlababeczka.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 public class CakeLayer extends ParentEntity {
 
     @ManyToOne
@@ -21,11 +24,6 @@ public class CakeLayer extends ParentEntity {
     @JoinColumn(name = "layer_taste_id")
     private LayerTaste layerTaste;
 
-    public CakeLayer(CakeOrderItem cakeOrderItem, LayerTaste layerTaste) {
-        super(UUID.randomUUID());
-        this.cakeOrderItem = cakeOrderItem;
-        this.layerTaste = layerTaste;
-    }
 
     public CakeLayer() {
     }
