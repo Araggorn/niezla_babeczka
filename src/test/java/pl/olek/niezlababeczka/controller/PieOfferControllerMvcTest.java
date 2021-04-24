@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class PieOfferContollerMvcTest {
+public class PieOfferControllerMvcTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -32,12 +32,11 @@ public class PieOfferContollerMvcTest {
 
     @Test
     public void shouldAddUser() throws Exception {
-        String login = "testlogin";
         Money money = Money.of(CurrencyUnit.EUR, BigDecimal.valueOf(1L));
         MoneyDto moneyDto = MoneyDto.toDto(money);
         mockMvc.perform(
                 post("/v1/pieoffers")
-                        .content(asJsonString(new PieOfferDto(moneyDto, UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID())))
+                        .content(asJsonString(new PieOfferDto(UUID.randomUUID(), UUID.randomUUID(), UUID.randomUUID(), moneyDto)))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())

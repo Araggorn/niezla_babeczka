@@ -26,11 +26,11 @@ public class PieService {
 
     public PieDto addPie(PieDto pieDto) {
         Pie pie = Pie.builder()
+                .id(pieDto.getId())
                 .name(pieDto.getName())
                 .description(pieDto.getDescription())
                 .build();
         Pie pieSav = pieRepo.save(pie);
-        pie.setId(UUID.randomUUID());
         log.info("added pie with id{}", pieSav.getId());
         return PieDto.toDto(pieSav);
     }

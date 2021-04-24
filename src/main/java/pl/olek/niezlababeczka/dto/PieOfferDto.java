@@ -18,17 +18,17 @@ import java.util.UUID;
 @Builder
 public class PieOfferDto {
 
-    private MoneyDto money;
-    private UUID pieSize_id;
-    private UUID pie_id;
     private UUID id;
+    private UUID pieSizeId;
+    private UUID pieId;
+    private MoneyDto money;
 
     public static PieOfferDto toDto(PieOffer pieOffer) {
-        MoneyDto moneyN = new MoneyDto(pieOffer.getPrice().getCurrencyUnit(), pieOffer.getPrice().getAmount());
         return PieOfferDto.builder()
-                .pieSize_id(pieOffer.getPieSize().getId())
-                .pie_id(pieOffer.getPie().getId())
-                .money(moneyN)
+                .id(pieOffer.getId())
+                .pieSizeId(pieOffer.getPieSize().getId())
+                .pieId(pieOffer.getPie().getId())
+                .money(MoneyDto.toDto(pieOffer.getPrice()))
                 .build();
 
     }

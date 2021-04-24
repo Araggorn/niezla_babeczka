@@ -1,6 +1,7 @@
 package pl.olek.niezlababeczka.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.joda.money.CurrencyUnit;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,9 +11,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import pl.olek.niezlababeczka.dto.MoneyDto;
 import pl.olek.niezlababeczka.dto.PieOfferDto;
+import pl.olek.niezlababeczka.entity.Pie;
+import pl.olek.niezlababeczka.entity.PieSize;
 import pl.olek.niezlababeczka.service.PieOfferService;
 
+import javax.annotation.PostConstruct;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
@@ -58,18 +64,4 @@ public class PieOfferController {
         return pieOfferService.showAllPieOffers();
     }
 
-//    @PostConstruct
-//    void createSamplePieOffer() {
-//        Pie pie = new Pie (17.23, "jabłecznik", "pychotka");
-//        PieSize ps = new PieSize("24x24cm");
-//        CurrencyUnit currencyUnit = CurrencyUnit.CAD;
-//        BigDecimal bigDecimal = BigDecimal.valueOf(12L);
-//        MoneyDto moneyDto = new MoneyDto(CurrencyUnit.CAD, BigDecimal.valueOf(123L));
-//        pieOfferService.addPieOffer(PieOfferDto.builder()
-//                .pie_id(pie.getId())
-//                .pieSize_id(ps.getId())
-//                .money(moneyDto)
-//                .id(UUID.randomUUID())
-//                .build());
-//    }
 }

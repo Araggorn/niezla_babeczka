@@ -25,6 +25,7 @@ public class PieSizeService {
 
     public PieSizeDto addPieSize(PieSizeDto pieSizeDto) {
         PieSize pieSize = PieSize.builder()
+                .id(pieSizeDto.getId())
                 .description(pieSizeDto.getDescription())
                 .build();
         PieSize pieSSav = pieSizeRepo.save(pieSize);

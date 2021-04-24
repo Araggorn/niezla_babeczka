@@ -34,8 +34,8 @@ public class PieOfferService {
     public PieOfferDto addPieOffer(PieOfferDto pieOfferDto){
         Money money =  Money.of(pieOfferDto.getMoney().getCurrencyUnit(), pieOfferDto.getMoney().getValue());
         PieOffer pieOffer = PieOffer.builder()
-                .pie(pieRepo.getOne(pieOfferDto.getPie_id()))
-                .pieSize(pieSizeRepo.getOne(pieOfferDto.getPieSize_id()))
+                .pie(pieRepo.getOne(pieOfferDto.getPieId()))
+                .pieSize(pieSizeRepo.getOne(pieOfferDto.getPieSizeId()))
                 .price(money)
                 .build();
 
