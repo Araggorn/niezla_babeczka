@@ -40,7 +40,7 @@ public class InitDataLoader {
     private final CakeOfferService cakeOfferService;
 
     @PostConstruct
-    void createSamplePieOffer() {
+    void createSamplePieOfferAndCakeOffer() {
         UUID pieId = UUID.randomUUID();
         pieService.addPie(new PieDto(pieId, "jabłecznik", "pychotka"));
 
@@ -48,7 +48,7 @@ public class InitDataLoader {
         pieSizeService.addPieSize(new PieSizeDto(pieSizeId, "24x24cm"));
 
         UUID cakeId = UUID.randomUUID();
-      cakeService.addCake(new CakeDto(cakeId,"tort nakedcake", 20, "bez tynku"));
+        cakeService.addCake(new CakeDto(cakeId, "tort nakedcake", 20, "bez tynku"));
 
         UUID layerTasteId = UUID.randomUUID();
         layerTasteService.addLayerTaste(new LayerTasteDto(layerTasteId, "orange"));
@@ -61,10 +61,10 @@ public class InitDataLoader {
 
 
         cakeOfferService.addCakeOffer(CakeOfferDto.builder()
-        .cake_id(cakeId)
-        .cakeLayerSet(setCakeLayer)
-        .moneyDto(moneyDto)
-        .build());
+                .cake_id(cakeId)
+                .cakeLayerSet(setCakeLayer)
+                .moneyDto(moneyDto)
+                .build());
 
         pieOfferService.addPieOffer(PieOfferDto.builder()
                 .pieId(pieId)

@@ -3,6 +3,7 @@ package pl.olek.niezlababeczka.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.olek.niezlababeczka.entity.Cake;
 
@@ -12,6 +13,7 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class CakeDto {
 
     private UUID id;
