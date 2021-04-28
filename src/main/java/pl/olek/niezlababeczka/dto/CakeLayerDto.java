@@ -16,6 +16,7 @@ import java.util.UUID;
 @Builder
 public class CakeLayerDto {
 
+    private UUID cakeLayerID;
     private UUID layerTasteID;
 
     public static CakeLayerDto toDto(CakeLayer cakeLayer){

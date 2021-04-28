@@ -6,12 +6,15 @@ import lombok.Getter;
 import lombok.Setter;
 import pl.olek.niezlababeczka.entity.Cake;
 
+import java.util.UUID;
+
 @Setter
 @Getter
 @Builder
 @AllArgsConstructor
 public class CakeDto {
 
+    private UUID id;
     private String name;
     private Integer numberOfPortions;
     private String description;

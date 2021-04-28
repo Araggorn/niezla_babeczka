@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.olek.niezlababeczka.entity.LayerTaste;
 
+import java.util.UUID;
+
 @Setter
 @Getter
 @Builder
@@ -14,6 +16,7 @@ import pl.olek.niezlababeczka.entity.LayerTaste;
 @NoArgsConstructor
 public class LayerTasteDto {
 
+    private UUID id;
     private String taste;
 
     public static LayerTasteDto toDto(LayerTaste layerTaste) {
