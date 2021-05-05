@@ -1,9 +1,10 @@
 package pl.olek.niezlababeczka.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -12,8 +13,9 @@ import javax.persistence.ManyToOne;
 @Entity
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
+@NoArgsConstructor
 public class CakeLayer extends ParentEntity {
 
     @ManyToOne
@@ -24,9 +26,6 @@ public class CakeLayer extends ParentEntity {
     @JoinColumn(name = "layer_taste_id")
     private LayerTaste layerTaste;
 
-
-    public CakeLayer() {
-    }
 
     public CakeLayer(LayerTaste layerTaste) {
         this.layerTaste = layerTaste;

@@ -21,7 +21,8 @@ public class CakeLayerDto {
 
     public static CakeLayerDto toDto(CakeLayer cakeLayer){
         return CakeLayerDto.builder()
-                .layerTasteID(cakeLayer.getId())
+                .layerTasteID(cakeLayer.getLayerTaste().getId())
+                .cakeLayerID(cakeLayer.getId())
                 .build();
 
     }

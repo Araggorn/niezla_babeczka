@@ -1,8 +1,10 @@
 package pl.olek.niezlababeczka.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import net.bytebuddy.implementation.bind.annotation.Super;
 
 import javax.persistence.Entity;
 
@@ -10,18 +12,12 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @SuperBuilder
 public class Cake extends Product {
 
     private Integer numberOfPortions;
     private String name;
     private String description;
-
-    public Cake(Integer numberOfPortions, String name, String description) {
-        super();
-        this.numberOfPortions = numberOfPortions;
-        this.description = description;
-        this.name = name;
-    }
 
 }

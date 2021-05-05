@@ -30,6 +30,7 @@ public class CakeService {
                 .name(cakeDto.getName())
                 .description(cakeDto.getDescription())
                 .numberOfPortions(cakeDto.getNumberOfPortions())
+                .id(cakeDto.getId())
                 .build();
         Cake cakeSaved = cakeRepo.save(cake);
         log.info("added cake with id{}", cakeSaved.getId());

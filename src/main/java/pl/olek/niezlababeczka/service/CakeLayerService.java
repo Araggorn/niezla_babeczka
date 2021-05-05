@@ -29,10 +29,11 @@ public class CakeLayerService {
 
     public CakeLayerDto addCakeLayer(CakeLayerDto cakeLayerDto){
 
-        CakeLayer cakeLeyer = CakeLayer.builder()
+        CakeLayer cakeLayer = CakeLayer.builder()
+                .id(cakeLayerDto.getCakeLayerID())
                 .layerTaste(layerTasteRepo.getOne(cakeLayerDto.getLayerTasteID()))
                 .build();
-        CakeLayer cakeLayerSaved = cakeLayerRepo.save(cakeLeyer);
+        CakeLayer cakeLayerSaved = cakeLayerRepo.save(cakeLayer);
         log.info("adding CakeLayer with id {}", cakeLayerSaved.getId());
         return CakeLayerDto.toDto(cakeLayerSaved);
     }

@@ -2,6 +2,7 @@ package pl.olek.niezlababeczka.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class CakeDto {
 
     private UUID id;
@@ -26,6 +28,7 @@ public class CakeDto {
                 .name(cake.getName())
                 .numberOfPortions(cake.getNumberOfPortions())
                 .description(cake.getDescription())
+                .id(cake.getId())
                 .build();
 
     }
