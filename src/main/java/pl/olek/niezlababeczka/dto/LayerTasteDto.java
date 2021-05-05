@@ -21,6 +21,7 @@ public class LayerTasteDto {
 
     public static LayerTasteDto toDto(LayerTaste layerTaste) {
         return LayerTasteDto.builder()
+                .id(layerTaste.getId())
                 .taste(layerTaste.getTaste())
                 .build();
     }

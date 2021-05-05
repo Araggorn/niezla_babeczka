@@ -29,6 +29,7 @@ public class LayerTasteService {
     public LayerTasteDto addLayerTaste(LayerTasteDto layerTasteDto) {
         LayerTaste lt = LayerTaste.builder()
                 .taste(layerTasteDto.getTaste())
+                .id(layerTasteDto.getId())
                 .build();
         LayerTaste ltSaved = layerTasteRepo.save(lt);
         log.info("added cake with id{}", ltSaved.getId());

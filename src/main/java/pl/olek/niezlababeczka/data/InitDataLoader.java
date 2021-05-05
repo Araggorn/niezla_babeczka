@@ -4,11 +4,14 @@ import lombok.AllArgsConstructor;
 import org.joda.money.CurrencyUnit;
 import org.springframework.stereotype.Service;
 import pl.olek.niezlababeczka.dto.CakeDto;
+import pl.olek.niezlababeczka.dto.CakeLayerDto;
+import pl.olek.niezlababeczka.dto.CakeOfferDto;
 import pl.olek.niezlababeczka.dto.LayerTasteDto;
 import pl.olek.niezlababeczka.dto.MoneyDto;
 import pl.olek.niezlababeczka.dto.PieDto;
 import pl.olek.niezlababeczka.dto.PieOfferDto;
 import pl.olek.niezlababeczka.dto.PieSizeDto;
+import pl.olek.niezlababeczka.entity.CakeLayer;
 import pl.olek.niezlababeczka.repository.CakeLayerRepo;
 import pl.olek.niezlababeczka.service.CakeLayerService;
 import pl.olek.niezlababeczka.service.CakeOfferService;
@@ -20,6 +23,7 @@ import pl.olek.niezlababeczka.service.PieSizeService;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -49,18 +53,21 @@ public class InitDataLoader {
         UUID layerTasteId = UUID.randomUUID();
         layerTasteService.addLayerTaste(new LayerTasteDto(layerTasteId, "orange"));
 
-//        UUID cakeLayerId = UUID.randomUUID();
-//        cakeLayerService.addCakeLayer(new CakeLayerDto(cakeLayerId, layerTasteId));
-//        Set<CakeLayer> setCakeLayer = Set.of(cakeLayerRepo.getOne(cakeLayerId));
+        UUID cakeLayerId = UUID.randomUUID();
+        cakeLayerService.addCakeLayer(CakeLayerDto.builder()
+                .cakeLayerID(cakeLayerId)
+                .layerTasteID(layerTasteId)
+                .build());
+        Set<CakeLayer> setCakeLayer = Set.of(cakeLayerRepo.getOne(cakeLayerId));
 
         MoneyDto moneyDto = new MoneyDto(CurrencyUnit.CAD, BigDecimal.valueOf(123L));
 
 
-//        cakeOfferService.addCakeOffer(CakeOfferDto.builder()
-//                .cake_id(cakeId)
-//                .cakeLayerSet(setCakeLayer)
-//                .moneyDto(moneyDto)
-//                .build());
+        cakeOfferService.addCakeOffer(CakeOfferDto.builder()
+                .cake_id(cakeId)
+                .cakeLayerSet(setCakeLayer)
+                .moneyDto(moneyDto)
+                .build());
 
         pieOfferService.addPieOffer(PieOfferDto.builder()
                 .pieId(pieId)

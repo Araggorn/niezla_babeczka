@@ -1,9 +1,9 @@
 package pl.olek.niezlababeczka.entity;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
 import java.util.UUID;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 public class LayerTaste extends ParentEntity {
 
     private String taste;
