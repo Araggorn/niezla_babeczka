@@ -11,6 +11,7 @@ import pl.olek.niezlababeczka.dto.MoneyDto;
 import pl.olek.niezlababeczka.dto.PieDto;
 import pl.olek.niezlababeczka.dto.PieOfferDto;
 import pl.olek.niezlababeczka.dto.PieSizeDto;
+import pl.olek.niezlababeczka.dto.SweetDto;
 import pl.olek.niezlababeczka.entity.CakeLayer;
 import pl.olek.niezlababeczka.repository.CakeLayerRepo;
 import pl.olek.niezlababeczka.service.CakeLayerService;
@@ -20,6 +21,7 @@ import pl.olek.niezlababeczka.service.LayerTasteService;
 import pl.olek.niezlababeczka.service.PieOfferService;
 import pl.olek.niezlababeczka.service.PieService;
 import pl.olek.niezlababeczka.service.PieSizeService;
+import pl.olek.niezlababeczka.service.SweetService;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
@@ -38,6 +40,7 @@ public class InitDataLoader {
     private final CakeService cakeService;
     private final LayerTasteService layerTasteService;
     private final CakeOfferService cakeOfferService;
+    private final SweetService sweetService;
 
     @PostConstruct
     void createSamplePieOfferAndCakeOffer() {
@@ -59,6 +62,14 @@ public class InitDataLoader {
                 .layerTasteID(layerTasteId)
                 .build());
         Set<CakeLayer> setCakeLayer = Set.of(cakeLayerRepo.getOne(cakeLayerId));
+
+        UUID sweetId = UUID.randomUUID();
+        sweetService.addSweet(SweetDto.builder()
+                .name("blablak")
+                .id(sweetId)
+                .priceValue(BigDecimal.valueOf(10L))
+                .currency(CurrencyUnit.EUR)
+                .build());
 
         MoneyDto moneyDto = new MoneyDto(CurrencyUnit.CAD, BigDecimal.valueOf(123L));
 
