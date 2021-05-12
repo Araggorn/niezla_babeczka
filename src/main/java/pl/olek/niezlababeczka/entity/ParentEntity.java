@@ -1,9 +1,9 @@
 package pl.olek.niezlababeczka.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
+import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -25,9 +25,11 @@ public abstract class ParentEntity {
     protected UUID id;
 
     @CreationTimestamp
+    @JsonIgnore
     private LocalDateTime createTime;
 
     @UpdateTimestamp
+    @JsonIgnore
     private LocalDateTime updateTime;
 
     private boolean deleted;

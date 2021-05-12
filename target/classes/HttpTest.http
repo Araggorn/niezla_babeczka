@@ -9,3 +9,11 @@ GET http://localhost:8080/v1/sweets
 GET http://localhost:8080/v1/pieoffers
 
 ###
+
+GET http://localhost:8080/v1/sweets
+
+###
+
+GET http://localhost:8080/v1/cakeoffers
+
+###
