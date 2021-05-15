@@ -18,6 +18,7 @@ import pl.olek.niezlababeczka.service.CakeLayerService;
 import pl.olek.niezlababeczka.service.CakeOfferService;
 import pl.olek.niezlababeczka.service.CakeService;
 import pl.olek.niezlababeczka.service.LayerTasteService;
+import pl.olek.niezlababeczka.service.OrderService;
 import pl.olek.niezlababeczka.service.PieOfferService;
 import pl.olek.niezlababeczka.service.PieService;
 import pl.olek.niezlababeczka.service.PieSizeService;
@@ -41,6 +42,8 @@ public class InitDataLoader {
     private final LayerTasteService layerTasteService;
     private final CakeOfferService cakeOfferService;
     private final SweetService sweetService;
+
+    private final OrderService orderService;
 
     @PostConstruct
     void createSamplePieOfferAndCakeOffer() {
@@ -72,6 +75,9 @@ public class InitDataLoader {
                 .build());
 
         MoneyDto moneyDto = new MoneyDto(CurrencyUnit.CAD, BigDecimal.valueOf(123L));
+
+        UUID orderId = UUID.randomUUID();
+
 
 
         cakeOfferService.addCakeOffer(CakeOfferDto.builder()
