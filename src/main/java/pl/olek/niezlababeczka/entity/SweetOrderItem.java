@@ -3,6 +3,7 @@ package pl.olek.niezlababeczka.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -12,6 +13,7 @@ import javax.persistence.ManyToOne;
 @Getter
 @Setter
 @NoArgsConstructor
+@SuperBuilder
 public class SweetOrderItem extends OrderItem{
 
     private int quantity;
